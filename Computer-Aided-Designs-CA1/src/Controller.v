@@ -1,6 +1,6 @@
 module Controller(clk, rst, start, enM, initCnt6, initReg, hashEn, startRnd, 
             doneRnd, initCnt2, enF, enCnt2, sl, co2, co6, addsl, enCnt6, 
-            done, romRead, fSel, startRnd);
+            done, romRead, fSel);
     
     input clk, rst, start, doneRnd, co2, co6;
 

@@ -2,7 +2,7 @@
 
 
 module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCnt6, 
-                co6, co2, enF, addsl, sl, fSel);
+                co6, co2, enF, addsl, sl, fSel, cnt6Out);
 
     input clk, rst, hashEn, enM, romRead, initCnt6, enCnt6, enF, 
                 addsl, sl, fSel;
@@ -10,6 +10,7 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     input [127:0] inp;
 
     output [127:0] out;
+    output [5:0] cnt6Out;
     output co6, co2;
 
     wire [31:0] m00Out, m01Out, m10Out, m11Out, mux1Out, inpA, inpB, inpC, inpD, aOut, bOut, cOut, dOut,
@@ -24,7 +25,6 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     wire [31:0] mux8Inp [0:1];
     wire [31:0] muxslInp [0:1];
     wire [31:0] muxfInp [0:1];
-    wire [5:0] cnt6Out;
     wire [1:0] cnt2Out;
 
 
