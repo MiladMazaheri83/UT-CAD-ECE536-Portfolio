@@ -7,6 +7,7 @@ module RandomGeneratorDatapath(clk, rst, inp, ldCnt3, enCnt3, co3, shiftP1, load
     output [1:0] randNum;
 
     wire x;
+    wire [2:0] cnt3Out;
     reg [5:0] dataReg;
 
     Counter #3 Cnt3(clk, rst, ldCnt3, enCnt3, 3'b001, cnt3Out, co3);

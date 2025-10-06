@@ -36,12 +36,12 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     MemoryBlock #(.WIDTH(32), .HEIGHT(64), .FILE_PATH("../data/constant.mem")) Rom(clk, romRead, cnt6Out, romOut);
     Mux #(4, 32) Mux1(mux1Inp, randIn, mux1Out);
 
-    Counter #6 Cnt6(clk, rst, initCnt6, enCnt6, 0, cnt6Out, co6);
+    Counter #6 Cnt6(clk, rst, initCnt6, enCnt6, 6'd0, cnt6Out, co6);
     Register #32 F(clk, rst, fInp, fOut, enF);
     Mux #(2, 32) Muxf(muxfInp, fSel, fInp);
 
     LeftRotate #32 LeftRotate_(fOut, rotateOut, cnt6Out);
-    Counter #2 Cnt2(clk, rst, initCnt2, enCnt2, 0, cnt2Out, co2);
+    Counter #2 Cnt2(clk, rst, initCnt2, enCnt2, 2'd0, cnt2Out, co2);
     Mux #(4, 32) Mux2(mux2Inp, cnt2Out, mux2Out);
 
     Mux #(2, 32) Mux3(mux3Inp, addsl, mux3Out);

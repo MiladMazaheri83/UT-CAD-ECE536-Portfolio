@@ -10,8 +10,8 @@ module Top(clk, rst, inp, out, start, done);
     wire [5:0] cnt6Out;
 
     Datapath TopDatapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCnt6, 
-                co6, enF, addsl, sl, fSel, cnt6Out);
-    
+                co6, co2, enF, addsl, sl, fSel, cnt6Out);
+
     Controller TopController(clk, rst, start, enM, initCnt6, initReg, hashEn, startRnd, 
             doneRnd, initCnt2, enF, enCnt2, sl, co2, co6, addsl, enCnt6, 
             done, romRead, fSel);
