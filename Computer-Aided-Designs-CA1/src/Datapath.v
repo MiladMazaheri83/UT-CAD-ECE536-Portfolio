@@ -18,9 +18,9 @@ module Datapath(clk, rst, inp, randIn, out);
     Register #32 m10(clk, rst, inp[95:64], m10Out, enM);
     Register #32 m11(clk, rst, inp[127:96], m11Out, enM);
 
-
+    MemoryBlock #(.WIDTH(16), .HEIGHT)
     Mux #(4, 32) mux1(mux1Inp, randIn, mux1Out);
-    
+
     
 
 

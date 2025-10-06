@@ -1,7 +1,7 @@
 module MemoryBlock #(
     parameter WIDTH = 16,
     parameter HEIGHT = 16,
-    parameter FILE_PATH = "map.txt"  // Make FILE_PATH a parameter
+    parameter FILE_PATH = "map.txt"
 ) (
     input wire clk,
     input wire wr,
