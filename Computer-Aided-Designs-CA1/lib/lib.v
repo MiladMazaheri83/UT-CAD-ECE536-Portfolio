@@ -4,12 +4,9 @@ module MemoryBlock #(
     parameter FILE_PATH = "map.txt"
 ) (
     input wire clk,
-    input wire wr,
-    input wire rd,
-    input wire [ADDR_W-1:0] addr_x,
+    input wire read,
     input wire [ADDR_H-1:0] addr_y,
-    input wire data_in,
-    output reg data_out
+    output reg [WIDTH-1:0] data_out
 );
     localparam ADDR_W = $clog2(WIDTH);
     localparam ADDR_H = $clog2(HEIGHT);
@@ -17,18 +14,12 @@ module MemoryBlock #(
     reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
 
     initial begin
-        $readmemb(FILE_PATH, mem);
+        $readmemh(FILE_PATH, mem);
     end
 
     always @(*) begin
-        if (rd) begin
-            data_out = mem[addr_y][addr_x];
-        end
-    end
-
-    always @(posedge clk) begin 
-        if (wr) begin
-            mem[addr_y][addr_x] <= data_in;
+        if (read) begin
+            data_out = mem[addr_y];
         end
     end
 
@@ -42,7 +33,6 @@ module Counter #(
     input wire rst,
     input wire load,
     input wire encnt,
-    input wire init,
     input wire [(m - 1):0] pin,
     output reg [(m - 1):0] cntout,
     output wire co
@@ -52,9 +42,6 @@ module Counter #(
             cntout <= {m{1'b0}};
         else if (load) begin
             cntout <= pin;
-        end
-        else if (init) begin
-            cntout <= {m{1'b0}};
         end
         else if (encnt) begin
             cntout <= cntout + 1;
