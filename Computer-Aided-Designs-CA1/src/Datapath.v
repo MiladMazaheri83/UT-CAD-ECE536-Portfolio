@@ -45,7 +45,7 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     Mux #(4, 32) Mux2(mux2Inp, cnt2Out, mux2Out);
 
     Mux #(2, 32) Mux3(mux3Inp, addsl, mux3Out);
-    Mux #(2, 32) Muxsl(muxslInp, sl, muxslOut)
+    Mux #(2, 32) Muxsl(muxslInp, sl, muxslOut);
     Adder #32 Adder_(mux3Out, muxslOut, adderOut);
 
     Register #32 A(clk, rst, inpA, aOut, hashEn);

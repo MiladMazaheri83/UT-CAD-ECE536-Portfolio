@@ -3,13 +3,16 @@ module MemoryBlock #(
     parameter HEIGHT = 16,
     parameter FILE_PATH = "map.txt"
 ) (
-    input wire clk,
-    input wire read,
-    input wire [ADDR_H-1:0] addr_y,
-    output reg [WIDTH-1:0] data_out
+    clk,
+    read,
+    addr_y,
+    data_out
 );
-    localparam ADDR_W = $clog2(WIDTH);
+
     localparam ADDR_H = $clog2(HEIGHT);
+    input clk, read;
+    input [ADDR_H-1:0] addr_y;
+    output reg [WIDTH-1:0] data_out;
     
     reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
 

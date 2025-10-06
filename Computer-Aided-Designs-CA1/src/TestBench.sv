@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module tb_Top;
+module TopTestBench;
     logic clk;
     logic rst;
     logic start;
