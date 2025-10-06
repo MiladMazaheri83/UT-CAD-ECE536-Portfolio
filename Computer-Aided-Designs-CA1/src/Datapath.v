@@ -2,15 +2,15 @@
 
 
 module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCnt6, 
-                co6, enF, addsl, sl, ldCnt3, enCnt3, fSel);
+                co6, co2, enF, addsl, sl, fSel);
 
     input clk, rst, hashEn, enM, romRead, initCnt6, enCnt6, enF, 
-                addsl, sl, ldCnt3, enCnt3, fSel;
+                addsl, sl, fSel;
     input [1:0] randIn;
     input [127:0] inp;
 
     output [127:0] out;
-    output co6, co2, co3;
+    output co6, co2;
 
     wire [31:0] m00Out, m01Out, m10Out, m11Out, mux1Out, inpA, inpB, inpC, inpD, aOut, bOut, cOut, dOut,
                  romOut, fOut, mux4Out, rotateOut, mux2Out, mux3Out, muxslOut, adderOut, fInp; 
@@ -26,7 +26,6 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     wire [31:0] muxfInp [0:1];
     wire [5:0] cnt6Out;
     wire [1:0] cnt2Out;
-    wire [2:0] cnt3Out;
 
 
     Register #32 M00(clk, rst, inp[31:0], m00Out, enM);
@@ -60,8 +59,6 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     Mux #(2, 32) Mux6(mux6Inp, initReg, inpB);
     Mux #(2, 32) Mux7(mux7Inp, initReg, inpC);
     Mux #(2, 32) Mux8(mux8Inp, initReg, inpD);
-
-    Counter #3 Cnt3(clk, rst, ldCnt3, enCnt3, 3'b001, cnt3Out, co3);
 
 
     assign mux1Inp[0] = m00Out;

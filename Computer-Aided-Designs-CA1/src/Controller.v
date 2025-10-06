@@ -56,6 +56,7 @@ module Controller(clk, rst, start, enM, initCnt6, initReg, hashEn, startRnd,
                 enF = 1;
                 fSel = 1;
                 enCnt2 = 1;
+                romRead = 1;
             end
 
             S8: begin
@@ -103,7 +104,7 @@ module Controller(clk, rst, start, enM, initCnt6, initReg, hashEn, startRnd,
 
             S9:
                 ns = IDLE;
-                
+
         endcase
     end
 endmodule
