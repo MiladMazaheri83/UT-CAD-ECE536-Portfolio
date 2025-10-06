@@ -1,9 +1,7 @@
 module MemoryBlock #(
     parameter WIDTH = 16,
     parameter HEIGHT = 16,
-    parameter ADDR_W = 4,
-    parameter ADDR_H = 4,
-    parameter FILE_PATH = "map.txt"
+    parameter FILE_PATH = "map.txt"  // Make FILE_PATH a parameter
 ) (
     input wire clk,
     input wire wr,
@@ -13,6 +11,9 @@ module MemoryBlock #(
     input wire data_in,
     output reg data_out
 );
+    localparam ADDR_W = $clog2(WIDTH);
+    localparam ADDR_H = $clog2(HEIGHT);
+    
     reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
 
     initial begin
