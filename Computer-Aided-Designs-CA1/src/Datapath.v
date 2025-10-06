@@ -91,7 +91,7 @@ module Datapath(clk, rst, inp, randIn, out, hashEn, enM, romRead, initCnt6, enCn
     assign mux7Inp[0] = m01Out;
     assign mux7Inp[1] = bOut;
 
-    assign mux8Inp[0] = m11Out;
+    assign mux8Inp[0] = m00Out;
     assign mux8Inp[1] = cOut;
 
     assign muxslInp[0] = fOut;
