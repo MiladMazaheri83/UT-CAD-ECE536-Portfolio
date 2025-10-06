@@ -22,7 +22,7 @@ module Controller(clk, rst, start, enM, initCnt6, initReg, hashEn, startRnd,
 
     always @(*) begin
         enM = 0; initCnt6 = 0; initReg = 0; hashEn = 0; initCnt2 = 0; enF = 0; enCnt2 = 0; sl = 0;
-        addsl = 0; enCnt6 = 0; done = 0; romRead = 0; fSel = 0; startRnd = 1;
+        addsl = 0; enCnt6 = 0; done = 0; romRead = 0; fSel = 0; startRnd = 0;
 
         case (ps)
             IDLE: begin
