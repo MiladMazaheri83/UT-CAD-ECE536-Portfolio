@@ -7,10 +7,18 @@ module TopTestBench;
     logic [127:0] inp;
     logic done;
     logic [127:0] out;
+    logic [31:0]aInit;
+    logic [31:0]bInit;
+    logic [31:0]cInit;
+    logic [31:0]dInit;
     
-    Top dut (
+    HashGenerator #(.SIZE(128)) dut (
         .clk(clk),
         .rst(rst),
+        .aInit(aInit),
+        .bInit(bInit),
+        .cInit(cInit),
+        .dInit(dInit),
         .inp(inp),
         .out(out),
         .start(start),
@@ -24,6 +32,10 @@ module TopTestBench;
         rst = 1;
         start = 0;
         inp = 128'h0;
+        aInit = 32'h67452301;
+        bInit = 32'hefcdab89;
+        cInit = 32'h98badcfe;
+        dInit = 32'h10325476;
         
         // Reset sequence
         #20;
@@ -43,9 +55,9 @@ module TopTestBench;
         $display("Expected:   c6f6c75d2bbbb9a586cf3291347acdce");
         
         if (out === 128'hc6f6c75d2bbbb9a586cf3291347acdce) begin
-            $display("✓ TEST PASSED - Hash matches expected value!");
+            $display("TEST PASSED - Hash matches expected value!");
         end else begin
-            $display("✗ TEST FAILED - Hash mismatch!");
+            $display("TEST FAILED - Hash mismatch!");
         end
         
         #100;

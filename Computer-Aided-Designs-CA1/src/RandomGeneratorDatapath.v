@@ -1,16 +1,32 @@
-`include "../lib/lib.v"
+module RandomGeneratorDatapath(
+    clk,
+    rst, 
+    inp,
+    ldCnt3,
+    enCnt3,
+    co3,
+    shiftP1,
+    loadP1,
+    randNum
+);
+    input wire clk, rst, ldCnt3, enCnt3, shiftP1, loadP1;
+    input wire[5:0] inp;
+    output wire [1:0] randNum;
+    output wire co3;
 
-module RandomGeneratorDatapath(clk, rst, inp, ldCnt3, enCnt3, co3, shiftP1, loadP1, randNum);
-    input clk, rst, ldCnt3, enCnt3, shiftP1, loadP1;
-    input [5:0] inp;
-    output co3;
-    output [1:0] randNum;
-
-    wire x;
+    wire sIn;
     wire [2:0] cnt3Out;
     reg [5:0] dataReg;
 
-    Counter #3 Cnt3(clk, rst, ldCnt3, enCnt3, 3'b001, cnt3Out, co3);
+    Counter #(.SIZE(3)) Cnt3 (
+        .clk(clk),
+        .rst(rst),
+        .load(ldCnt3),
+        .enCnt(enCnt3),
+        .pin(3'b010),
+        .cntOut(cnt3Out),
+        .co(co3)
+    );
 
 
     always @(posedge clk, posedge rst) begin
@@ -21,11 +37,11 @@ module RandomGeneratorDatapath(clk, rst, inp, ldCnt3, enCnt3, co3, shiftP1, load
             dataReg <= inp;
 
         else if (shiftP1) begin
-            dataReg <= {dataReg[4:0], x};
+            dataReg <= {dataReg[4:0], sIn};
         end
     end
 
 
     assign randNum = dataReg[5:4];
-    assign x = (dataReg[5] ^ dataReg[3]) ^ dataReg[1];
+    assign sIn = (dataReg[5] ^ dataReg[3]) ^ dataReg[1];
 endmodule

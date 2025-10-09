@@ -1,9 +1,16 @@
-module LeftRotate(dataIn, dataOut, index);
-    parameter WIDTH = 32;
+module LeftRotate
+#(
+    parameter WIDTH = 32,
+    parameter IDX_WIDTH = 6
+) (
+    dataIn,
+    index,
+    dataOut
+);
     input [WIDTH-1:0] dataIn;
-    input [5:0] index;
+    input [IDX_WIDTH-1:0] index;
     output [WIDTH-1:0] dataOut;
-
+    
     localparam ADDR_WIDTH = $clog2(WIDTH);
     
     reg [ADDR_WIDTH-1:0] STEPS [0:63];

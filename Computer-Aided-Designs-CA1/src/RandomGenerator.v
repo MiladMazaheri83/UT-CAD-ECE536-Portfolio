@@ -1,4 +1,11 @@
-module RandomGenerator(clk, rst, startRnd, doneRnd, inp, randOut);
+module RandomGenerator(
+    clk,
+    rst,
+    startRnd,
+    doneRnd,
+    inp,
+    randOut
+);
     input clk, rst, startRnd;
     input [5:0] inp;
     output doneRnd;
@@ -6,8 +13,28 @@ module RandomGenerator(clk, rst, startRnd, doneRnd, inp, randOut);
 
     wire ldCnt3, enCnt3, co3, shiftP1, loadP1;
     
-    RandomGeneratorDatapath RGDatapath(clk, rst, inp, ldCnt3, enCnt3, co3, shiftP1, loadP1, randOut);
+    RandomGeneratorDatapath RG_dp(
+        .clk(clk),
+        .rst(rst), 
+        .inp(inp),
+        .ldCnt3(ldCnt3),
+        .enCnt3(enCnt3),
+        .co3(co3),
+        .shiftP1(shiftP1),
+        .loadP1(loadP1),
+        .randNum(randOut)
+    );
 
-    RandomGeneratorController RGController(clk, rst, startRnd, ldCnt3, enCnt3, co3, shiftP1, loadP1, doneRnd);
+    RandomGeneratorController RG_ctl(
+        .clk(clk),
+        .rst(rst),
+        .startRnd(startRnd),
+        .ldCnt3(ldCnt3),
+        .enCnt3(enCnt3),
+        .co3(co3),
+        .shiftP1(shiftP1),
+        .loadP1(loadP1),
+        .doneRnd(doneRnd)
+    );
     
 endmodule

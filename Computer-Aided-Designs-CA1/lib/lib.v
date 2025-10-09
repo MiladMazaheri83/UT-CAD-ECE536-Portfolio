@@ -3,16 +3,15 @@ module MemoryBlock #(
     parameter HEIGHT = 16,
     parameter FILE_PATH = "map.txt"
 ) (
-    clk,
     read,
-    addr_y,
-    data_out
+    addr,
+    dataOut
 );
 
     localparam ADDR_H = $clog2(HEIGHT);
-    input clk, read;
-    input [ADDR_H-1:0] addr_y;
-    output reg [WIDTH-1:0] data_out;
+    input wire read;
+    input wire [ADDR_H-1:0] addr;
+    output reg [WIDTH-1:0] dataOut;
     
     reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
 
@@ -22,7 +21,7 @@ module MemoryBlock #(
 
     always @(*) begin
         if (read) begin
-            data_out = mem[addr_y];
+            dataOut = mem[addr];
         end
     end
 
@@ -30,81 +29,100 @@ endmodule
 
 
 module Counter #(
-    parameter m = 2
+    parameter SIZE = 2
 ) (
-    input wire clk,
-    input wire rst,
-    input wire load,
-    input wire encnt,
-    input wire [(m - 1):0] pin,
-    output reg [(m - 1):0] cntout,
-    output wire co
+    clk,
+    rst,
+    load,
+    enCnt,
+    pin,
+    cntOut,
+    co
 );
+
+    input wire clk, rst, load, enCnt;
+    input wire [(SIZE - 1):0] pin;
+    output reg [(SIZE - 1):0] cntOut;
+    output wire co;
+
     always @(posedge clk or posedge rst) begin
         if (rst)
-            cntout <= {m{1'b0}};
+            cntOut <= {SIZE{1'b0}};
         else if (load) begin
-            cntout <= pin;
+            cntOut <= pin;
         end
-        else if (encnt) begin
-            cntout <= cntout + 1;
+        else if (enCnt) begin
+            cntOut <= cntOut + 1;
         end
     end
 
-    assign co = &{cntout};
+    assign co = &{cntOut};
     
 endmodule
 
 
 module UpDownCounter #(
-    parameter m = 8
+    parameter SIZE = 8
 ) (
-    input wire clk,
-    input wire rst,
-    input wire load,
-    input wire encnt,
-    input wire init,
-    input wire countUp,
-    input wire countDown,
-    input wire [(m - 1):0] pin,
-    output reg [(m - 1):0] cntout,
-    output wire overflow,
-    output wire underflow
+    clk,
+    rst,
+    load,
+    enCnt,
+    init,
+    countUp,
+    countDown,
+    pin,
+    cntOut,
+    overFlow,
+    underFlow
 );
+
+    input wire clk, rst, load, enCnt, init, countUp, countDown;
+    input wire [(SIZE - 1):0] pin;
+    output reg [(SIZE - 1):0] cntOut;
+    output wire overFlow, underFlow;
+
     always @(posedge clk or posedge rst) begin
         if (rst) begin
-            cntout <= {m{1'b0}};
+            cntOut <= {SIZE{1'b0}};
         end 
-        else if (encnt) begin
+        else if (enCnt) begin
             if (load) begin
-                cntout <= pin;
+                cntOut <= pin;
             end 
             else if (init) begin
-                cntout <= {m{1'b0}};
+                cntOut <= {SIZE{1'b0}};
             end 
             else begin
                 if (countUp) begin
-                    cntout <= cntout + 1;
+                    cntOut <= cntOut + 1;
                 end 
                 if (countDown) begin
-                    cntout <= cntout - 1;
+                    cntOut <= cntOut - 1;
                 end
             end
         end
     end
 
-    assign overflow = encnt & countUp & (cntout == {m{1'b1}});
-    assign underflow = encnt & countDown & (cntout == {m{1'b0}});
+    assign overFlow = enCnt & countUp & (cntOut == {SIZE{1'b1}});
+    assign underFlow = enCnt & countDown & (cntOut == {SIZE{1'b0}});
 
 endmodule
 
 
-module Register(clk, rst, inp, out, en);
-    parameter N = 32;
+module Register #(
+    parameter SIZE = 32
+) (
+    clk,
+    rst,
+    inp,
+    out,
+    en
+);
     
-    input clk, rst, en;
-    input [N - 1:0] inp;
-    output reg [N - 1:0] out;
+    input wire clk, rst, en;
+    input wire [SIZE - 1:0] inp;
+    output reg [SIZE - 1:0] out;
 
     always @(posedge clk) begin
         if (rst)
@@ -117,12 +135,16 @@ endmodule
 
 
 module Decoder #(  
-    parameter WIDTH = 4  
+    parameter SIZE = 4  
 ) (  
-    input wire en,  
-    input wire [WIDTH-1:0] in,  
-    output reg [(2**WIDTH)-1:0] out  
+    en,  
+    in,  
+    out  
 );  
+    input wire en;
+    input wire [SIZE-1:0] in;
+    output reg [(2**SIZE)-1:0] out;
+
     always @(*) begin   
         out <= 0; 
         if (en) begin  
@@ -133,52 +155,66 @@ module Decoder #(
 endmodule  
 
 
-module ShiftRegister #(parameter n = 5) (
-    input wire clk,
-    input wire clk_en,
-    input wire rst,
-    input wire shQ,
-    input wire loadQ,
-    input wire sin,
-    input wire [(n - 1):0] qin,
-    output reg [(n - 1):0] qout,
-    output wire sout
-    );
+module ShiftRegister #(
+    parameter SIZE = 5
+) (
+    clk,
+    rst,
+    shQ,
+    loadQ,
+    sIn,
+    qIn,
+    qOut,
+    sOut
+);
+    input wire clk, rst, shQ, loadQ, sIn;
+    input wire [(SIZE - 1):0] qIn;
+    output reg [(SIZE - 1):0] qOut;
+    output wire sOut;
 
     always @(posedge clk) begin
         if (rst) 
-            qout <= {n{1'b0}};
+            qOut <= {SIZE{1'b0}};
 
-        else if (clk_en) begin
-            if (loadQ) begin
-                qout <= qin;
-            end else if (shQ) begin
-                qout <= {qout[(n - 2):0], sin};
-            end
+        else if (loadQ) begin
+            qOut <= qIn;
+        end else if (shQ) begin
+            qOut <= {qOut[(SIZE - 2):0], sIn};
         end
     end
 
-    assign sout = qout[0];
+    assign sOut = qOut[0];
 
 endmodule
 
 
-module Adder(a, b, out);
-    parameter N = 32;
-
-    input [N - 1:0] a, b;
-    output [N - 1:0] out;
+module Adder #(
+    parameter SIZE = 32
+) (
+    a,
+    b,
+    out
+);
+    input [SIZE - 1:0] a, b;
+    output [SIZE - 1:0] out;
 
     assign out = a + b;
 endmodule
 
 
-module Alu(srcA, srcB, opCode, aluResult, zero);
-    parameter N = 32;
+module Alu #(
+    parameter SIZE = 32
+) (
+    srcA,
+    srcB,
+    opCode,
+    aluResult,
+    zero
+);
 
-    input [N - 1:0] srcA, srcB;
+    input [SIZE - 1:0] srcA, srcB;
     input [2:0] opCode;
-    output reg [N - 1:0] aluResult;
+    output reg [SIZE - 1:0] aluResult;
     output zero;
 
     assign zero = ~|aluResult;
@@ -199,16 +235,15 @@ module Alu(srcA, srcB, opCode, aluResult, zero);
 endmodule
 
 
-module Mux(inp, sel, out);
-    parameter N = 4;
-    parameter M = 32;
-    localparam S = $clog2(N);
+module Multiplexer #(
+    parameter INP_NUMBER = 4,
+    parameter SIZE = 32
+) (
+    input  [INP_NUMBER*SIZE-1:0] inp,
+    input  [$clog2(INP_NUMBER)-1:0] sel,
+    output [SIZE-1:0] out
+);
 
-    input [M - 1:0] inp [0:N - 1];
-    input [S - 1:0] sel;
-    output [M - 1:0] out;
+    assign out = inp[sel*SIZE +: SIZE];
 
-    assign out = inp[sel];
-    
 endmodule
-
