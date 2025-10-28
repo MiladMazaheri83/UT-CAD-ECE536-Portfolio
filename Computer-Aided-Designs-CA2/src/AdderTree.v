@@ -14,8 +14,12 @@ module AdderTree #(
 
     genvar i;
     generate
-        for (i = 0; i < N; i = i + 1)
-            assign levelWire[0][i] = {{LEVELS{in[i][W-1]}}, in[i]};
+        for (i = 0; i < N; i = i + 1) begin : SIGN_EXTENDS
+            SignExtend #(.INP_SIZE(W), .OUT_SIZE(W+LEVELS)) SignExtendLayer(
+                .inp(in[i]),
+                .out(levelWire[0][i])
+            );
+        end
     endgenerate
 
     genvar j, level;

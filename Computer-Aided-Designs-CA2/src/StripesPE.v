@@ -60,8 +60,10 @@ module StripesPE #(
         .sum(adderTreeSum)
     );
 
-    assign extendedSum = {{(SUM_W-ADDER_TREE_WIDTH){adderTreeSum[ADDER_TREE_WIDTH-1]}}, 
-                            adderTreeSum};
+    SignExtend #(.INP_SIZE(ADDER_TREE_WIDTH), .OUT_SIZE(SUM_W)) SignExtendSum(
+        .inp(adderTreeSum),
+        .out(extendedSum)
+    );
 
     Adder #(.SIZE(SUM_W)) Adder1(
         .a(extendedSum),
