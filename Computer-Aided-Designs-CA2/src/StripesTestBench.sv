@@ -1,3 +1,5 @@
+`timescale 1ns/1ns
+
 module StripesTestBench;
     logic clk, rst;
     logic iIsMsb, iIsLsb, iValid, initZero;
