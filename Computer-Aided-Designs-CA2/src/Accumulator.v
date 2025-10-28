@@ -4,27 +4,28 @@ module Accumulator #(
     clk,
     rst,
     init,
+    en,
     inp,
     out
 );
-    input wire clk, rst, init;
+    input wire clk, rst, init, en;
     input wire [SIZE-1:0] inp;
-    output reg [SIZE-1:0] out;
+    output wire [SIZE-1:0] out;
 
-    wire [SIZE-1:0] regOut, adderOut;
+    wire [SIZE-1:0] adderOut;
 
     Register #(.SIZE(SIZE)) accumulatorReg(
         .clk(clk),
         .rst(rst),
         .init(init),
         .inp(adderOut),
-        .out(regOut),
-        .en(1)
+        .out(out),
+        .en(en)
     );
 
     Adder #(.SIZE(SIZE)) accumulatorAdder(
         .a(inp),
-        .b(regOut),
+        .b(out),
         .out(adderOut)
     );
 endmodule
