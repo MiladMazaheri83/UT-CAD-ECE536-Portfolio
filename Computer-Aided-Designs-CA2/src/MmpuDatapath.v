@@ -29,9 +29,8 @@ module MmpuDatapath #(
     nCntOut,
     rowCntOut,
     shiftCntOut,
-    initialSum,
     rData,
-    wData,
+    wData
 );
     localparam FIRST_PE_N = N /2;
     localparam SECOND_PE_N = N - FIRST_PE_N;
@@ -43,7 +42,7 @@ module MmpuDatapath #(
 
     input wire clk, rst, bEn, aEn, loadA, shiftA, initZero, iIsMsb, iIsLsb1, iIsLsb2, iValid1, iValid2,
                 shiftCntEn, nCntEn, rowCntEn, shiftCntLoad, nCntLoad, rowCntLoad, addressCntEn, write;
-    input wire [SUM_W-1:0] rData, initialSum;
+    input wire [SUM_W-1:0] rData;
     output wire nCntOut, rowCntOut, shiftCntOut;
     output wire [ADD_W-1:0] address;
     output wire [SUM_W-1:0] wData;
@@ -135,7 +134,7 @@ module MmpuDatapath #(
         .initZero(initZero),
         .iVecB(bReg[(FIRST_PE_N)*W-1:0]),
         .iVecABits(iVecABits[FIRST_PE_N-1:0]),
-        .initialSum(initialSum),
+        .initialSum({SUM_W{1'b0}}),
         .oDotProduct(oDotProduct1)
     );
 

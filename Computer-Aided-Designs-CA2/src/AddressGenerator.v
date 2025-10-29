@@ -13,7 +13,7 @@ module AddressGenerator #(
     write,
     address,
     nCntOut,
-    rowCntOut,
+    rowCntOut
 );
     localparam ADD_W = $clog2(MEM_SIZE);
     localparam N_COUNTER = $clog2(N);

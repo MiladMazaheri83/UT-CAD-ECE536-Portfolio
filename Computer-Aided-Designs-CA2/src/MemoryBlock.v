@@ -12,6 +12,7 @@ module MemoryBlock #(
 );
 
     localparam ADDR_H = $clog2(HEIGHT);
+    
     input wire clk;
     input wire read;
     input wire write;
