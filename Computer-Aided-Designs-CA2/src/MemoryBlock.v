@@ -1,7 +1,7 @@
 module MemoryBlock #(
     parameter WIDTH = 16,
     parameter HEIGHT = 16,
-    parameter FILE_PATH = "map.txt"
+    parameter FILE_PATH = "file.txt"
 ) (
     clk,
     read,

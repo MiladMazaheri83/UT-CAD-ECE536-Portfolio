@@ -1,5 +1,5 @@
-module ShiftRegister #(
-    parameter SIZE = 5
+module ShiftLeftRegister #(
+    parameter SIZE = 16
 ) (
     clk,
     rst,
@@ -25,6 +25,6 @@ module ShiftRegister #(
         end
     end
 
-    assign sOut = qOut[0];
+    assign sOut = qOut[SIZE-1];
 
 endmodule

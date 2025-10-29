@@ -1,6 +1,5 @@
 module StripesPE #(
     parameter W = 16,
-    parameter MP = 16,
     parameter N = 4,
     parameter SUM_W = 34
 ) (
