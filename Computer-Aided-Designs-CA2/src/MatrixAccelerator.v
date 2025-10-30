@@ -3,7 +3,8 @@ module MatrixAccelerator #(
     parameter MP = 16,
     parameter W = 16,
     parameter MEM_SIZE = 128,
-    parameter ROWS = 8
+    parameter ROWS = 8,
+    parameter MEM_PATH
 ) (
     clk,
     rst,
@@ -31,7 +32,7 @@ module MatrixAccelerator #(
         .address(address)
     );
 
-    MemoryBlock #(.WIDTH(SUM_W), .HEIGHT(MEM_SIZE), .FILE_PATH("test.mem")) Mem(
+    MemoryBlock #(.WIDTH(SUM_W), .HEIGHT(MEM_SIZE), .FILE_PATH(MEM_PATH)) Mem(
         .clk(clk),
         .read(1'b1),
         .addr(address),
