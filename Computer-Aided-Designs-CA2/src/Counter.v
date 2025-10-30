@@ -26,6 +26,6 @@ module Counter #(
         end
     end
 
-    assign co = &{cntOut};
+    assign co = &cntOut;
     
 endmodule

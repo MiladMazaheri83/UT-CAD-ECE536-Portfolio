@@ -21,7 +21,7 @@ module MmpuTop #(
     input wire [SUM_W-1:0] rData;
     output wire write, done;
     output wire [ADD_W-1:0] address;
-    output wire [ADD_W-1:0] wData;
+    output wire [SUM_W-1:0] wData;
 
     wire bEn, aEn, loadA, shiftA, initZero, iIsMsb, iIsLsb1, iIsLsb2, iValid1, iValid2, shiftCntEn,
          nCntEn, rowCntEn, shiftCntLoad, nCntLoad, rowCntLoad, addressCntEn, nCntOut, rowCntOut, shiftCntOut;

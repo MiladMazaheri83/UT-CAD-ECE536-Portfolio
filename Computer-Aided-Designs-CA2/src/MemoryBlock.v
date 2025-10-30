@@ -1,7 +1,7 @@
 module MemoryBlock #(
     parameter WIDTH = 16,
     parameter HEIGHT = 16,
-    parameter FILE_PATH = "file.txt"
+    parameter FILE_PATH = "test.mem"
 ) (
     clk,
     read,
@@ -12,7 +12,7 @@ module MemoryBlock #(
 );
 
     localparam ADDR_H = $clog2(HEIGHT);
-    
+
     input wire clk;
     input wire read;
     input wire write;

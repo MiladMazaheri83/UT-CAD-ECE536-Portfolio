@@ -8,7 +8,7 @@ module MatrixAccelerator #(
     clk,
     rst,
     start,
-    done,
+    done
 );
     localparam SUM_W = MP + W + $clog2(N);
     localparam ADD_W = $clog2(MEM_SIZE);
@@ -31,12 +31,13 @@ module MatrixAccelerator #(
         .address(address)
     );
 
-    MemoryBlock #(.WIDTH(SUM_W), .HEIGHT(MEM_SIZE), .FILE_PATH("test.mem")) (
+    MemoryBlock #(.WIDTH(SUM_W), .HEIGHT(MEM_SIZE), .FILE_PATH("test.mem")) Mem(
         .clk(clk),
         .read(1'b1),
         .addr(address),
         .dataOut(rData),
-        .dataIn(wData)
+        .dataIn(wData),
+        .write(write)
     );
     
 endmodule
