@@ -61,7 +61,7 @@ module MmpuController (
 
             S1: begin
                 if (start == 0) begin
-                    rowCntEn = 1;
+                    rowCntLoad = 1;
                     nCntLoad = 1;
                 end
             end
@@ -73,39 +73,39 @@ module MmpuController (
                     nCntEn = 1;
                 end
 
-                {addressCntEn, bEn} = 2'b1;
+                {addressCntEn, bEn} = 2'b11;
             end
 
             S3: begin
                 if (nCntOut) begin
-                    {shiftCntLoad, nCntLoad, initZero} = 3'b1;
+                    {shiftCntLoad, nCntLoad, initZero} = 3'b111;
                 end else begin
                     nCntEn = 1;
                 end
 
-                {aEn, loadA, addressCntEn} = 3'b1;
+                {aEn, loadA, addressCntEn} = 3'b111;
             end
 
-            S4: {shiftCntEn, iIsMsb, shiftA, aEn, iValid1, iValid2} = 6'b1;
+            S4: {shiftCntEn, iIsMsb, shiftA, aEn, iValid1, iValid2} = 6'b111111;
 
             S5: begin
                 if (shiftCntOut) begin
                     iIsLsb1 = 1;
                 end else begin
-                    {iValid2, shiftA, aEn, shiftCntEn} = 4'b1;
+                    {iValid2, shiftA, aEn, shiftCntEn} = 4'b1111;
                 end
 
                 iValid1 = 1;
             end
 
-            S6: {iIsLsb2, iValid2} = 2'b1;
+            S6: {iIsLsb2, iValid2} = 2'b11;
 
             S7: begin
                 if (rowCntOut == 0) begin
                     rowCntEn = 1;
                 end
 
-                {write, shiftCntLoad} = 2'b1;
+                {write, shiftCntLoad} = 2'b11;
             end
 
             S8: done = 1;
