@@ -18,14 +18,12 @@ module RandomGeneratorDatapath(
     wire [2:0] cnt3Out;
     reg [5:0] dataReg;
 
-    Counter #(.SIZE(3)) Cnt3 (
+    Counter3bit Counter3bitBlock(
         .clk(clk),
         .clr(clr),
+        .en(enCnt3),
         .load(ldCnt3),
-        .enCnt(enCnt3),
-        .pin(3'b010),
-        .cntOut(cnt3Out),
-        .co(co3)
+        .cnt3Out(cnt3Out)
     );
 
 

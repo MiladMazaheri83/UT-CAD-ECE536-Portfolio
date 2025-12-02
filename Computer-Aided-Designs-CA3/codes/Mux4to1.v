@@ -12,7 +12,7 @@ module Mux4to1(
     output wire [7:0] out; 
     
     genvar i;
-    generate;
+    generate
         for (i = 0; i < 8; i = i + 1) begin
             c1 Mux1BitBlock(
                 .A0(d00[i]), 
