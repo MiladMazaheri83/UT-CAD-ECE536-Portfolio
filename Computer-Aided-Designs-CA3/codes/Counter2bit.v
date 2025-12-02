@@ -10,7 +10,7 @@ module Counter2bit(
     
     s2 CounterBit0(
         .D00(1'b0),
-        .D01(1'b1),
+        .D01(init),
         .D10(init),
         .D11(1'b0),
         .A1(cnt2Out[0]),
@@ -24,7 +24,7 @@ module Counter2bit(
     
     s2 CounterBit1(
         .D00(1'b0),
-        .D01(1'b1),
+        .D01(init),
         .D10(init),
         .D11(1'b0),
         .A1(cnt2Out[1]),
