@@ -17,7 +17,7 @@ module LoadRegister(
     genvar i;
     generate
         for (i = 0; i < 8; i = i + 1) begin
-            s2 NormalRegisterBlock(
+            s2 LoadRegisterBlock(
                 .D00(out[i]),
                 .D01(1'b0),
                 .D10(dataIn[i]),
