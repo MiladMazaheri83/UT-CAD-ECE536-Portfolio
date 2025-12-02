@@ -1,4 +1,4 @@
-module InitRegister(
+module LoadRegister(
     clk,
     clr,
     dataIn,
