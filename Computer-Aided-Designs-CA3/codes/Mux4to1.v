@@ -13,7 +13,7 @@ module Mux4to1(
     
     genvar i;
     generate;
-        for (i = 0; i < 8; i++) begin
+        for (i = 0; i < 8; i = i + 1) begin
             c1 Mux1BitBlock(
                 .A0(d00[i]), 
                 .A1(d01[i]), 
