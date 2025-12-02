@@ -8,14 +8,14 @@ module Counter6bit(
     input wire clk, clr, en, init;
     output wire [5:0] cnt6Out;
     
-    wire [5:0] andChain;
+    wire [4:0] andChain;
     
     assign andChain[0] = en;
     
     genvar i;
     generate
-        for (i = 1; i < 6; i = i + 1) begin
-            And1bit And(
+        for (i = 1; i < 5; i = i + 1) begin
+            And1bit And1bitBlock(
                 .A(andChain[i-1]),
                 .B(cnt6Out[i-1]),
                 .out(andChain[i])
