@@ -16,8 +16,8 @@ module Counter6bit(
     generate
         for (i = 1; i < 5; i = i + 1) begin
             And1bit And1bitBlock(
-                .A(andChain[i-1]),
-                .B(cnt6Out[i-1]),
+                .a(andChain[i-1]),
+                .b(cnt6Out[i-1]),
                 .out(andChain[i])
             );
         end

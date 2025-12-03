@@ -9,27 +9,15 @@ module Xor3(
 
     wire xorAB;
 
-    c1 Xor1Block(
-        .A0(1'b0), 
-        .A1(1'b1), 
-        .SA(b),
-        .B0(1'b1),
-        .B1(1'b0),
-        .SB(b),
-        .S0(1'b0),
-        .S1(a),
-        .f(xorAB)
+    Xor2 Xor2Block1(
+        .a(a),
+        .b(b),
+        .out(xorAB)
     );
 
-    c1 Xor2Block(
-        .A0(1'b0), 
-        .A1(1'b1), 
-        .SA(c),
-        .B0(1'b1),
-        .B1(1'b0),
-        .SB(c),
-        .S0(1'b0),
-        .S1(xorAB),
-        .f(out)
+    Xor2 Xor2Block2(
+        .a(xorAB),
+        .b(c),
+        .out(out)
     );
 endmodule

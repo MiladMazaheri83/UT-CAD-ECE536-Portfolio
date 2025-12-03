@@ -16,32 +16,39 @@ module RandomGeneratorDatapath(
 
     wire sIn;
     wire [2:0] cnt3Out;
-    reg [5:0] dataReg;
+    wire [5:0] dataReg;
 
-    Counter #(.SIZE(3)) Cnt3 (
+    Counter3bit Counter3bitBlock(
         .clk(clk),
         .clr(clr),
+        .en(enCnt3),
         .load(ldCnt3),
-        .enCnt(enCnt3),
-        .pin(3'b010),
-        .cntOut(cnt3Out),
-        .co(co3)
+        .cnt3Out(cnt3Out)
     );
 
+    ShiftRegister6bit ShiftRegisterBlock(
+        .clk(clk),
+        .clr(clr),
+        .serIn(sIn),
+        .en(shiftP1),
+        .loadData(inp),
+        .load(loadP1),
+        .out(dataReg)
+    );
 
-    always @(posedge clk, posedge clr) begin
-        if (clr)
-            dataReg <= 0;
+    Xor3 Xor3Block(
+        .a(dataReg[5]),
+        .b(dataReg[3]),
+        .c(dataReg[1]),
+        .out(sIn)
+    );
 
-        else if (loadP1)
-            dataReg <= inp;
-
-        else if (shiftP1) begin
-            dataReg <= {dataReg[4:0], sIn};
-        end
-    end
-
+    And3 And3Block(
+        .a(cnt3Out[0]),
+        .b(cnt3Out[1]),
+        .c(cnt3Out[2]),
+        .out(co3)
+    );
 
     assign randNum = dataReg[5:4];
-    assign sIn = (dataReg[5] ^ dataReg[3]) ^ dataReg[1];
 endmodule
