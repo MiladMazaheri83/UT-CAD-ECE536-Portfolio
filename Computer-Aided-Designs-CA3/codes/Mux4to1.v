@@ -12,19 +12,18 @@ module Mux4to1(
     output wire [7:0] out; 
     
     genvar i;
-    generate;
+    generate
         for (i = 0; i < 8; i = i + 1) begin
-            c1 Mux1BitBlock(
-                .A0(d00[i]), 
-                .A1(d01[i]), 
-                .SA(s0),
-                .B0(d10[i]),
-                .B1(d11[i]),
-                .SB(s0),
-                .S0(s1),
-                .S1(1'b0),
-                .f(out[i])
+            Mux4to1oneBit Mux1BitBlock(
+                .s0(s0),
+                .s1(s1),
+                .d00(d00[i]),
+                .d01(d01[i]),
+                .d10(d10[i]),
+                .d11(d11[i]),
+                .out(out[i])
             );
+
         end
     endgenerate
 endmodule
