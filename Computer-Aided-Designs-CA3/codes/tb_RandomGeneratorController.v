@@ -3,26 +3,26 @@
 module tb_RandomGeneratorController;
 
     reg clk;
-    reg rst;
-    reg start_rnd;
+    reg clr;
+    reg startRnd;
     reg co3;
 
     wire ldCnt3;
     wire enCnt3;
     wire shiftP1;
     wire loadP1;
-    wire done_rnd;
+    wire doneRnd;
 
     RandomGeneratorController dut (
         .clk(clk),
-        .rst(rst),
-        .start_rnd(start_rnd),
+        .clr(clr),
+        .startRnd(startRnd),
         .co3(co3),
         .ldCnt3(ldCnt3),
         .enCnt3(enCnt3),
         .shiftP1(shiftP1),
         .loadP1(loadP1),
-        .done_rnd(done_rnd)
+        .doneRnd(doneRnd)
     );
 
     initial begin
@@ -31,20 +31,20 @@ module tb_RandomGeneratorController;
     end
 
     initial begin
-        rst = 1;
-        start_rnd = 0;
+        clr = 1;
+        startRnd = 0;
         co3 = 0;
         
 
         #20;
 
-        rst = 0;
+        clr = 0;
         #20;
 
         @(negedge clk);
-        start_rnd = 1;
+        startRnd = 1;
         @(negedge clk);
-        start_rnd = 0;
+        startRnd = 0;
 
         #50;
 
@@ -57,9 +57,9 @@ module tb_RandomGeneratorController;
         #50;
 
         @(negedge clk);
-        start_rnd = 1;
+        startRnd = 1;
         @(negedge clk);
-        start_rnd = 0;
+        startRnd = 0;
 
         #70;
 
