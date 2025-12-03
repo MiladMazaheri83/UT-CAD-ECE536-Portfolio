@@ -49,7 +49,7 @@ module Mul4to4_tb;
             $display("--- FAILURE: 4to4Mul failed with %d error(s). ---", error_count);
         end
 
-        $finish;
+        $stop;
     end
 
 endmodule

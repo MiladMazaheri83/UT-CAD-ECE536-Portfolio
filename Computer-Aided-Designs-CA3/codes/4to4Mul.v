@@ -30,7 +30,7 @@ module Mul4to4 (
         .a(S1[2]),
         .b(S2[0]),
         .sum(out[2]),
-        .carry(c1)
+        .cout(c1)
     );
 
     FullAdder FA1 (
@@ -38,7 +38,7 @@ module Mul4to4 (
         .b(S2[1]),
         .cin(c1),
         .sum(out[3]),
-        .carry(c2)
+        .cout(c2)
     );
 
     FullAdder FA2 (
@@ -46,7 +46,7 @@ module Mul4to4 (
         .b(S2[2]),
         .cin(c2),
         .sum(out[4]),
-        .carry(c3)
+        .cout(c3)
     );
 
     FullAdder FA3 (
@@ -54,17 +54,17 @@ module Mul4to4 (
         .b(S2[3]),
         .cin(c3),
         .sum(out[5]),
-        .carry(c4)
+        .cout(c4)
     );
 
     HalfAdder HA2 (
         .a(c4),
         .b(S2[4]),
         .sum(out[6]),
-        .carry(c5)
+        .cout(c5)
     );
 
-    xor2 Xor1 (
+    Xor2 Xor1 (
         .a(S2[5]),
         .b(c5),
         .out(out[7])

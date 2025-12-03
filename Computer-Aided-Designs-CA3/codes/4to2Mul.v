@@ -16,7 +16,7 @@ module Mul4to2 (
         .a(A[1]),
         .b(A[0]),
         .sum(partials[1]),
-        .carry(c1)
+        .cout(c1)
     );
 
     FullAdder FA1 (
@@ -24,7 +24,7 @@ module Mul4to2 (
         .b(A[1]),
         .cin(c1),
         .sum(partials[2]),
-        .carry(c2)
+        .cout(c2)
     );
 
     FullAdder FA2 (
@@ -32,14 +32,14 @@ module Mul4to2 (
         .b(A[2]),
         .cin(c2),
         .sum(partials[3]),
-        .carry(c3)
+        .cout(c3)
     );
 
     HalfAdder HA2 (
         .a(A[3]),
         .b(c3),
         .sum(partials[4]),
-        .carry(c4)
+        .cout(c4)
     );
 
     assign partials[5] = c4;
