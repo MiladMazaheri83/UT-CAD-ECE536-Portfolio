@@ -1,7 +1,7 @@
 module RippleCarryAdder8bit (
     A,
     B,
-    SUM,
+    SUM
 );
 
     input  wire [7:0] A, B;

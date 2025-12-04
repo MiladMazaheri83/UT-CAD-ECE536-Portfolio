@@ -44,7 +44,9 @@ module HashGeneratorDatapath(
     MemoryBlock #(.WIDTH(8), .HEIGHT(64), .FILE_PATH("k.mem")) Rom(
         .read(romRead),
         .addr(cnt6Out),
-        .dataOut(romOut)
+        .dataOut(romOut),
+        .write(1'b0),
+        .dataIn()
     );
 
     NormalRegister M00(
@@ -178,9 +180,9 @@ module HashGeneratorDatapath(
         .s0(1'b0),
         .s1(sl),
         .d00(fOut),
-        .d01(1'b0),
+        .d01(8'b00000000),
         .d10(bOut),
-        .d11(1'b0),
+        .d11(8'b00000000),
         .out(muxSlOut)
     );
 
