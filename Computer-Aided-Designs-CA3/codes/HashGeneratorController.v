@@ -14,7 +14,6 @@ module HashGeneratorController (
     sl,
     co2,
     co6,
-    addSl,
     enCnt6,
     done,
     romRead,
@@ -23,7 +22,7 @@ module HashGeneratorController (
 
     input clk, clr, start, doneRnd, co2, co6;
     output wire enCnt6, done, romRead, fSel, startRnd;
-    output wire enM, initCnt6, initReg, hashEn, initCnt2, enF, enCnt2, sl, addSl;
+    output wire enM, initCnt6, initReg, hashEn, initCnt2, enF, enCnt2, sl;
 
     wire S000Out, S001Out, S010Out, S011Out, S100Out, S101Out;
     wire S000in0, S000in1;
@@ -62,27 +61,13 @@ module HashGeneratorController (
         .out(S001Out)
     );
 
-    s2 S010 (
-        .D00(1'b0),
-        .D01(1'b1),
-        .D10(1'b1),
-        .D11(1'b1),
-        .A1(S010in0),
-        .B1(1'b0),
-        .A0(S010in1),
-        .B0(1'b1),
-        .clr(clr),
-        .clk(clk),
-        .out(S010Out)
-    );
-
     s2 S011 (
         .D00(1'b0),
         .D01(1'b1),
         .D10(1'b1),
         .D11(1'b1),
-        .A1(S010Out),
-        .B1(1'b0),
+        .A1(S010in1),
+        .B1(S010in0),
         .A0(S011in0),
         .B0(1'b1),
         .clr(clr),
@@ -184,15 +169,9 @@ module HashGeneratorController (
     );
 
     Or1bit Or1 (
-        .a(S100in0),
-        .b(S100Out),
-        .out(enF)
-    );
-
-    Or1bit Or2 (
         .a(S010in0),
-        .b(S101Out),
-        .out(hashEn)
+        .b(S010in1),
+        .out(startRnd)
     );
 
     Not1bit notInitCnt6 (
@@ -205,6 +184,8 @@ module HashGeneratorController (
         .out(initCnt2)
     );
 
+    assign enF = S100Out;
+    assign hashEn = S101Out;
     assign enM = S010in0;
     assign initReg = S010in0;
     assign startRnd = S010Out;
@@ -212,7 +193,6 @@ module HashGeneratorController (
     assign fSel = S100Out;
     assign romRead = S100Out;
     assign sl = S101Out;
-    assign addSl = S101Out;
     assign enCnt6 = S101Out;
     assign done = S000in1;
 

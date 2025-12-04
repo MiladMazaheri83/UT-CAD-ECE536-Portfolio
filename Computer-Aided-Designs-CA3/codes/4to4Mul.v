@@ -1,4 +1,4 @@
-module Mul4to4 (
+module Mul4to4_v (
     A,
     B,
     out

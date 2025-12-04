@@ -53,3 +53,38 @@ module Mul4to4_tb;
     end
 
 endmodule
+
+
+`timescale 1ns/1ps
+
+module tb_Mul2to2;
+
+    reg  [1:0] A;
+    reg  [1:0] B;
+    wire [3:0] out;
+
+    Mul2to2 dut (
+        .A(A),
+        .B(B),
+        .out(out)
+    );
+
+    integer i, j;
+
+    initial begin
+        A = 0;
+        B = 0;
+
+        for (i = 0; i < 4; i = i + 1) begin
+            for (j = 0; j < 4; j = j + 1) begin
+                A = i[1:0];
+                B = j[1:0];
+                #10;
+            end
+        end
+
+        #20;
+        $finish;
+    end
+
+endmodule

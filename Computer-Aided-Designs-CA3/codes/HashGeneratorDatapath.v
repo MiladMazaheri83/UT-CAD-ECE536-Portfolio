@@ -38,7 +38,7 @@ module HashGeneratorDatapath(
     wire [7:0] romOut, fOut, mux4Out, mux2Out, mux3Out, muxSlOut, adderOut, multOut;
     wire [31:0] mux4Inp;
     wire [1:0] cnt2Out;
-    wire co6And, enFin, enBin;
+    wire co6And, enFin;
 
 
     MemoryBlock #(.WIDTH(8), .HEIGHT(64), .FILE_PATH("k.mem")) Rom(
@@ -125,14 +125,14 @@ module HashGeneratorDatapath(
     );
 
     c1 enf(
-        .A0(1'b0),
+        .A0(1'b1),
         .A1(1'b0),
-        .SA(cnt2Out[1]),
+        .SA(fSel),
         .B0(1'b1),
-        .B1(cnt2Out[0]),
-        .SB(cnt2Out[1]),
-        .S0(1'b0),
-        .S1(enF),
+        .B1(1'b1),
+        .SB(fSel),
+        .S0(cnt2Out[0]),
+        .S1(cnt2Out[1]),
         .f(enFin)
     );
 
@@ -140,9 +140,9 @@ module HashGeneratorDatapath(
         .clk(clk),
         .clr(clr),
         .dataIn(mux4Out),
-        .en(enFin),
+        .en(fSel),
         .loadData(adderOut),
-        .load(fSel),
+        .load(enFin),
         .out(fOut)
     );
 
@@ -169,9 +169,9 @@ module HashGeneratorDatapath(
     Mux4to1 Mux2(
         .s0(cnt2Out[0]),
         .s1(cnt2Out[1]),
-        .d00(romOut),
-        .d01(mux1Out),
-        .d10(multOut),
+        .d00(multOut),
+        .d01(romOut),
+        .d10(mux1Out),
         .d11(aOut),
         .out(mux2Out)
     );
@@ -202,23 +202,11 @@ module HashGeneratorDatapath(
         .out(aOut)
     );
 
-    c1 enb(
-        .A0(1'b0),
-        .A1(1'b0),
-        .SA(cnt2Out[0]),
-        .B0(hashEn),
-        .B1(1'b0),
-        .SB(cnt2Out[0]),
-        .S0(1'b0),
-        .S1(cnt2Out[1]),
-        .f(enBin)
-    );
-
     LoadRegister BRegister(
         .clk(clk),
         .clr(clr),
         .dataIn(adderOut),
-        .en(enBin),
+        .en(hashEn),
         .loadData(bInit),
         .load(initReg),
         .out(bOut)

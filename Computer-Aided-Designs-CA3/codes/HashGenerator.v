@@ -18,7 +18,7 @@ module HashGenerator (
     output wire [31:0] out;
 
     wire doneRnd, co2, co6, enM, initCnt6, initReg, hashEn, initCnt2, enF;
-    wire enCnt2, sl, addSl, enCnt6, romRead, fSel, startRnd;
+    wire enCnt2, sl, enCnt6, romRead, fSel, startRnd;
     wire [1:0] randIn;
     wire [5:0] cnt6Out;
 
@@ -38,7 +38,6 @@ module HashGenerator (
         .enCnt2(enCnt2),
         .initCnt2(initCnt2),
         .enF(enF),
-        .addSl(addSl),
         .sl(sl),
         .fSel(fSel),
         .randIn(randIn),
@@ -66,7 +65,6 @@ module HashGenerator (
         .sl(sl),
         .co2(co2),
         .co6(co6),
-        .addSl(addSl),
         .enCnt6(enCnt6),
         .done(done),
         .romRead(romRead),
