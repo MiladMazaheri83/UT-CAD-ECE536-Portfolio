@@ -1,6 +1,6 @@
 module HashGeneratorDatapath(
     clk,
-    rst,
+    clr,
     aInit,
     bInit,
     cInit,
@@ -24,7 +24,7 @@ module HashGeneratorDatapath(
     co6,
     co2
 );
-    input wire clk, rst, hashEn, initReg, enM, romRead, initCnt6, enCnt6, enCnt2, initCnt2;
+    input wire clk, clr, hashEn, initReg, enM, romRead, initCnt6, enCnt6, enCnt2, initCnt2;
     input wire enF, addSl, sl, fSel;
     input wire [7:0] aInit, bInit, cInit, dInit;
     input [1:0] randIn;
@@ -38,7 +38,7 @@ module HashGeneratorDatapath(
     wire [7:0] romOut, fOut, mux4Out, mux2Out, mux3Out, muxSlOut, adderOut, multOut;
     wire [31:0] mux4Inp;
     wire [1:0] cnt2Out;
-    wire co6And;
+    wire co6And, enFin, enBin;
 
 
     MemoryBlock #(.WIDTH(8), .HEIGHT(64), .FILE_PATH("k.mem")) Rom(
@@ -49,7 +49,7 @@ module HashGeneratorDatapath(
 
     NormalRegister M00(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(inp[31:24]),
         .en(enM),
         .out(m00Out)
@@ -57,7 +57,7 @@ module HashGeneratorDatapath(
 
     NormalRegister M01(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(inp[23:16]),
         .en(enM),
         .out(m01Out)
@@ -65,7 +65,7 @@ module HashGeneratorDatapath(
 
     NormalRegister M10(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(inp[15:8]),
         .en(enM),
         .out(m10Out)
@@ -73,7 +73,7 @@ module HashGeneratorDatapath(
 
     NormalRegister M11(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(inp[7:0]),
         .en(enM),
         .out(m11Out)
@@ -91,7 +91,7 @@ module HashGeneratorDatapath(
 
     Counter6bit Cnt6(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .en(enCnt6),
         .init(initCnt6),
         .cnt6Out(cnt6Out)
@@ -122,11 +122,23 @@ module HashGeneratorDatapath(
         .out(mux4Out)
     );
 
+    c1 enf(
+        .A0(1'b0),
+        .A1(1'b0),
+        .SA(cnt2Out[1]),
+        .B0(1'b1),
+        .B1(cnt2Out[0]),
+        .SB(cnt2Out[1]),
+        .S0(1'b0),
+        .S1(enF),
+        .f(enFin)
+    );
+
     LoadRegister FRegister(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(mux4Out),
-        .en(enF),
+        .en(enFin),
         .loadData(adderOut),
         .load(fSel),
         .out(fOut)
@@ -140,7 +152,7 @@ module HashGeneratorDatapath(
 
     Counter2bit Cnt2(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .en(enCnt2),
         .init(initCnt2),
         .cnt2Out(cnt2Out)
@@ -157,19 +169,9 @@ module HashGeneratorDatapath(
         .s1(cnt2Out[1]),
         .d00(romOut),
         .d01(mux1Out),
-        .d10(8'b00000000),
+        .d10(multOut),
         .d11(aOut),
         .out(mux2Out)
-    );
-
-    Mux4to1 Mux3(
-        .s0(1'b0),
-        .s1(addSl),
-        .d00(mux2Out),
-        .d01(1'b0),
-        .d10(multOut),
-        .d11(1'b0),
-        .out(mux3Out)
     );
 
     Mux4to1 Muxsl(
@@ -183,14 +185,14 @@ module HashGeneratorDatapath(
     );
 
     RippleCarryAdder8bit AdderBlock(
-        .A(mux3Out),
+        .A(mux2Out),
         .B(muxSlOut),
         .SUM(adderOut)
     );
 
     LoadRegister ARegister(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(dOut),
         .en(hashEn),
         .loadData(aInit),
@@ -198,11 +200,23 @@ module HashGeneratorDatapath(
         .out(aOut)
     );
 
+    c1 enb(
+        .A0(1'b0),
+        .A1(1'b0),
+        .SA(cnt2Out[0]),
+        .B0(hashEn),
+        .B1(1'b0),
+        .SB(cnt2Out[0]),
+        .S0(1'b0),
+        .S1(cnt2Out[1]),
+        .f(enBin)
+    );
+
     LoadRegister BRegister(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(adderOut),
-        .en(hashEn),
+        .en(enBin),
         .loadData(bInit),
         .load(initReg),
         .out(bOut)
@@ -210,7 +224,7 @@ module HashGeneratorDatapath(
 
     LoadRegister CRegister(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(bOut),
         .en(hashEn),
         .loadData(cInit),
@@ -220,7 +234,7 @@ module HashGeneratorDatapath(
 
     LoadRegister DRegister(
         .clk(clk),
-        .clr(rst),
+        .clr(clr),
         .dataIn(cOut),
         .en(hashEn),
         .loadData(dInit),
@@ -285,5 +299,7 @@ module HashGeneratorDatapath(
             );
         end
     endgenerate
+
+    assign out = {aOut,bOut,cOut,dOut};
 
 endmodule

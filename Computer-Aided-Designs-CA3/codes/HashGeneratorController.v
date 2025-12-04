@@ -1,6 +1,6 @@
 module HashGeneratorController (
     clk,
-    rst,
+    clr,
     start,
     enM,
     initCnt6,
@@ -21,7 +21,7 @@ module HashGeneratorController (
     fSel
 );
 
-    input clk, rst, start, doneRnd, co2, co6;
+    input clk, clr, start, doneRnd, co2, co6;
     output wire enCnt6, done, romRead, fSel, startRnd;
     output wire enM, initCnt6, initReg, hashEn, initCnt2, enF, enCnt2, sl, addSl;
 
@@ -43,7 +43,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(S000in1),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S0)
     );
@@ -57,7 +57,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(S001in1),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S001Out)
     );
@@ -71,7 +71,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(S010in1),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S010Out)
     );
@@ -85,7 +85,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(S011in0),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S011Out)
     );
@@ -99,7 +99,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(S100in1),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S100Out)
     );
@@ -113,7 +113,7 @@ module HashGeneratorController (
         .B1(1'b0),
         .A0(1'b0),
         .B0(1'b1),
-        .clr(rst),
+        .clr(clr),
         .clk(clk),
         .out(S101Out)
     );
@@ -195,17 +195,25 @@ module HashGeneratorController (
         .out(hashEn)
     );
 
+    Not1bit notInitCnt6 (
+        .a(S010in0),
+        .out(initCnt6)
+    );
+
+    Not1bit notInitCnt2 (
+        .a(S100in0),
+        .out(initCnt2)
+    );
+
     assign enM = S010in0;
-    assign initCnt6 = S010in0;
     assign initReg = S010in0;
     assign startRnd = S010Out;
-    assign initCnt2 = S100in0;
     assign enCnt2 = S100Out;
     assign fSel = S100Out;
     assign romRead = S100Out;
     assign sl = S101Out;
     assign addSl = S101Out;
     assign enCnt6 = S101Out;
-    assign done = S000in0;
+    assign done = S000in1;
 
 endmodule

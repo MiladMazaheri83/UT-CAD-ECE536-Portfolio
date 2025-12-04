@@ -28,15 +28,11 @@ module HashGeneratorTestBench;
         #10;
         clr = 1; #10; clr = 0; #10;
         
-        inp = 32'h12345678;
+        inp = 32'h3761eded;
         start = 1; #10; start = 0;
         
-        #500;
-        
-        inp = 32'hABCDEF01;
-        start = 1; #10; start = 0;
-        
-        #500;
+        #10000;
+
         $stop;
     end
 endmodule
