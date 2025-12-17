@@ -1,0 +1,17 @@
+# Yosys synthesis script for LUT2 mapping
+# add your verilog files here like this: 
+# read_verilog <verilog_file1.v>
+# read_verilog <verilog_file2.v>
+
+read_verilog Controller.v
+read_verilog Datapath.v
+read_verilog HashGeneratorRTL.v
+read_verilog lib.v
+read_verilog Multiplier.v
+read_verilog RandomGenerator.v
+read_verilog RandomGeneratorController.v
+read_verilog RandomGeneratorDatapath.v
+
+hierarchy -check -top HashGenerator
+synth -lut 2
+write_verilog -norename -noattr -noexpr -nodec HashGenerator_lut2.v

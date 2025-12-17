@@ -54,7 +54,7 @@ module HashGeneratorDatapath #(
 
 
     // All constants are stored in a ROM for the calculation of F.
-    MemoryBlock #(.WIDTH(WORD), .HEIGHT(64), .FILE_PATH("./src/constant.mem")) Rom(
+    MemoryBlock #(.WIDTH(WORD), .HEIGHT(64)) Rom(
         .read(romRead),
         .addr(cnt6Out),
         .dataOut(romOut)
@@ -130,9 +130,9 @@ module HashGeneratorDatapath #(
     // A module that rotates F based on the step selected by the level of the main loop.
     Multiplier #(.WIDTH(WORD)) Multiplier_(
         .dataIn(fOut),
-        .index(cnt6Out),
         .dataOut(rotateOut)
     );
+
 
     // This counter is used to calculate F = F + A + constant[i] + M[rnd] in four steps.
     Counter #(.SIZE(2)) Cnt2(

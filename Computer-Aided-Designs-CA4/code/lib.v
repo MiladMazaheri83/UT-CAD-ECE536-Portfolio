@@ -1,31 +1,90 @@
 module MemoryBlock #(
     parameter WIDTH = 16,
-    parameter HEIGHT = 16,
-    parameter FILE_PATH = "map.txt"
+    parameter HEIGHT = 64
 ) (
-    read,
-    addr,
-    dataOut
+    input  wire        read,
+    input  wire [5:0]  addr,
+    output reg  [WIDTH-1:0] dataOut
 );
 
-    localparam ADDR_H = $clog2(HEIGHT);
-    input wire read;
-    input wire [ADDR_H-1:0] addr;
-    output reg [WIDTH-1:0] dataOut;
-    
-    reg [0:WIDTH - 1] mem [0:HEIGHT - 1];
+    reg [WIDTH-1:0] rom [0:HEIGHT-1];
 
     initial begin
-        $readmemh(FILE_PATH, mem);
+        rom[0]  = 16'ha478;
+        rom[1]  = 16'hb756;
+        rom[2]  = 16'h70db;
+        rom[3]  = 16'hceee;
+        rom[4]  = 16'h0faf;
+        rom[5]  = 16'hc62a;
+        rom[6]  = 16'h4613;
+        rom[7]  = 16'h9501;
+        rom[8]  = 16'h98d8;
+        rom[9]  = 16'hf7af;
+        rom[10] = 16'h5bb1;
+        rom[11] = 16'hd7be;
+        rom[12] = 16'h1122;
+        rom[13] = 16'h7193;
+        rom[14] = 16'h438e;
+        rom[15] = 16'h0821;
+        rom[16] = 16'h2562;
+        rom[17] = 16'hb340;
+        rom[18] = 16'h5a51;
+        rom[19] = 16'hc7aa;
+        rom[20] = 16'h105d;
+        rom[21] = 16'h1453;
+        rom[22] = 16'he681;
+        rom[23] = 16'hfbc8;
+        rom[24] = 16'hcde6;
+        rom[25] = 16'h07d6;
+        rom[26] = 16'h0d87;
+        rom[27] = 16'h14ed;
+        rom[28] = 16'he905;
+        rom[29] = 16'ha3f8;
+        rom[30] = 16'h02d9;
+        rom[31] = 16'h4c8a;
+        rom[32] = 16'h3942;
+        rom[33] = 16'hf681;
+        rom[34] = 16'h6122;
+        rom[35] = 16'h380c;
+        rom[36] = 16'hea44;
+        rom[37] = 16'hcfa9;
+        rom[38] = 16'h4b60;
+        rom[39] = 16'hbc70;
+        rom[40] = 16'h7ec6;
+        rom[41] = 16'h27fa;
+        rom[42] = 16'h3085;
+        rom[43] = 16'h1d05;
+        rom[44] = 16'hd039;
+        rom[45] = 16'h99e5;
+        rom[46] = 16'h7cf8;
+        rom[47] = 16'h5665;
+        rom[48] = 16'h2244;
+        rom[49] = 16'hff97;
+        rom[50] = 16'h23a7;
+        rom[51] = 16'ha039;
+        rom[52] = 16'h59c3;
+        rom[53] = 16'hcc92;
+        rom[54] = 16'hf47d;
+        rom[55] = 16'h5dd1;
+        rom[56] = 16'h7e4f;
+        rom[57] = 16'he6e0;
+        rom[58] = 16'h4314;
+        rom[59] = 16'h11a1;
+        rom[60] = 16'h7e82;
+        rom[61] = 16'hf235;
+        rom[62] = 16'hd2bb;
+        rom[63] = 16'hd391;
     end
 
     always @(*) begin
-        if (read) begin
-            dataOut = mem[addr];
-        end
+        if (read)
+            dataOut = rom[addr];
+        else
+            dataOut = {WIDTH{1'b0}};
     end
-
 endmodule
+
+
 
 
 module Counter #(
