@@ -18,7 +18,7 @@ module RandomGeneratorDatapath(
     wire [2:0] cnt3Out;
     reg [5:0] dataReg;
 
-    Counter #(.SIZE(3)) Cnt3 (
+    Counter3 Cnt3 (
         .clk(clk),
         .rst(rst),
         .load(ldCnt3),
@@ -29,7 +29,7 @@ module RandomGeneratorDatapath(
     );
 
 
-    always @(posedge clk, posedge rst) begin
+    always @(posedge clk) begin
         if (rst)
             dataReg <= 0;
 
@@ -39,6 +39,8 @@ module RandomGeneratorDatapath(
         else if (shiftP1) begin
             dataReg <= {dataReg[4:0], sIn};
         end
+        // hold state
+        dataReg <= dataReg;
     end
 
 

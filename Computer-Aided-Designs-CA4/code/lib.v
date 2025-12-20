@@ -1,5 +1,5 @@
 module MemoryBlock #(
-    parameter WIDTH = 16,
+    parameter WIDTH = 8,
     parameter HEIGHT = 64
 ) (
     input  wire        read,
@@ -87,7 +87,42 @@ endmodule
 
 
 
-module Counter #(
+module Counter6 #(
+    parameter SIZE = 6
+) (
+    clk,
+    rst,
+    load,
+    enCnt,
+    pin,
+    cntOut,
+    co
+);
+
+    input wire clk, rst, load, enCnt;
+    input wire [(SIZE - 1):0] pin;
+    output reg [(SIZE - 1):0] cntOut;
+    output wire co;
+
+    // Synchronous reset
+    always @(posedge clk) begin
+        if (rst)
+            cntOut <= {SIZE{1'b0}};
+        else if (load) begin
+            cntOut <= pin;
+        end
+        else if (enCnt) begin
+            cntOut <= cntOut + 1;
+        end
+        // hold state
+        cntOut <= cntOut;
+    end
+
+    assign co = &{cntOut};
+    
+endmodule
+
+module Counter2 #(
     parameter SIZE = 2
 ) (
     clk,
@@ -104,7 +139,8 @@ module Counter #(
     output reg [(SIZE - 1):0] cntOut;
     output wire co;
 
-    always @(posedge clk or posedge rst) begin
+    // Synchronous reset
+    always @(posedge clk) begin
         if (rst)
             cntOut <= {SIZE{1'b0}};
         else if (load) begin
@@ -113,6 +149,43 @@ module Counter #(
         else if (enCnt) begin
             cntOut <= cntOut + 1;
         end
+        // hold state
+        cntOut <= cntOut;
+    end
+
+    assign co = &{cntOut};
+    
+endmodule
+
+module Counter3 #(
+    parameter SIZE = 3
+) (
+    clk,
+    rst,
+    load,
+    enCnt,
+    pin,
+    cntOut,
+    co
+);
+
+    input wire clk, rst, load, enCnt;
+    input wire [(SIZE - 1):0] pin;
+    output reg [(SIZE - 1):0] cntOut;
+    output wire co;
+
+    // Synchronous reset
+    always @(posedge clk) begin
+        if (rst)
+            cntOut <= {SIZE{1'b0}};
+        else if (load) begin
+            cntOut <= pin;
+        end
+        else if (enCnt) begin
+            cntOut <= cntOut + 1;
+        end
+        // hold state
+        cntOut <= cntOut;
     end
 
     assign co = &{cntOut};
@@ -170,7 +243,7 @@ endmodule
 
 
 module Register #(
-    parameter SIZE = 32
+    parameter SIZE = 8
 ) (
     clk,
     rst,
@@ -248,7 +321,7 @@ endmodule
 
 
 module Adder #(
-    parameter SIZE = 32
+    parameter SIZE = 8
 ) (
     a,
     b,
@@ -294,9 +367,22 @@ module Alu #(
 endmodule
 
 
-module Multiplexer #(
+module Multiplexer4 #(
     parameter INP_NUMBER = 4,
-    parameter SIZE = 32
+    parameter SIZE = 8
+) (
+    input  [INP_NUMBER*SIZE-1:0] inp,
+    input  [$clog2(INP_NUMBER)-1:0] sel,
+    output [SIZE-1:0] out
+);
+
+    assign out = inp[sel*SIZE +: SIZE];
+
+endmodule
+
+module Multiplexer2 #(
+    parameter INP_NUMBER = 2,
+    parameter SIZE = 8
 ) (
     input  [INP_NUMBER*SIZE-1:0] inp,
     input  [$clog2(INP_NUMBER)-1:0] sel,

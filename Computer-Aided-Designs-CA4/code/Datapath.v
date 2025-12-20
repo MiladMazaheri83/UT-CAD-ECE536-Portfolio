@@ -1,6 +1,4 @@
-module HashGeneratorDatapath #(
-    parameter SIZE = 16
-) (
+module HashGeneratorDatapath(
     clk,
     rst,
     aInit,
@@ -26,14 +24,14 @@ module HashGeneratorDatapath #(
     co6,
     co2
 );
-    localparam WORD = (SIZE / 4);
+    localparam WORD = 8;
 
     input wire clk, rst, hashEn, initReg, enM, romRead, initCnt6, enCnt6, enCnt2, initCnt2;
     input wire enF, addSl, sl, fSel;
     input wire [WORD-1:0] aInit, bInit, cInit, dInit;
     input [1:0] randIn;
-    input [SIZE-1:0] inp;
-    output [SIZE-1:0] out;
+    input [15:0] inp;
+    output [15:0] out;
     output [5:0] cnt6Out;
     output wire co6;
     output wire co2;
@@ -54,7 +52,7 @@ module HashGeneratorDatapath #(
 
 
     // All constants are stored in a ROM for the calculation of F.
-    MemoryBlock #(.WIDTH(WORD), .HEIGHT(64)) Rom(
+    MemoryBlock Rom(
         .read(romRead),
         .addr(cnt6Out),
         .dataOut(romOut)
@@ -62,7 +60,7 @@ module HashGeneratorDatapath #(
 
     // In this part, we separate the input into four parts and store them in the M_i registers.
     // Register File
-    Register #(.SIZE(WORD)) M00(
+    Register M00(
         .clk(clk),
         .rst(rst),
         .inp(inp[(WORD*4)-1:WORD*3]),
@@ -70,7 +68,7 @@ module HashGeneratorDatapath #(
         .en(enM)
     );
 
-    Register #(.SIZE(WORD)) M01(
+    Register M01(
         .clk(clk),
         .rst(rst),
         .inp(inp[(WORD*3)-1:WORD*2]),
@@ -78,7 +76,7 @@ module HashGeneratorDatapath #(
         .en(enM)
     );
 
-    Register #(.SIZE(WORD)) M10(
+    Register M10(
         .clk(clk),
         .rst(rst),
         .inp(inp[(WORD*2)-1:WORD*1]),
@@ -86,7 +84,7 @@ module HashGeneratorDatapath #(
         .en(enM)
     );
 
-    Register #(.SIZE(WORD)) M11(
+    Register M11(
         .clk(clk),
         .rst(rst),
         .inp(inp[(WORD*1)-1:WORD*0]),
@@ -95,14 +93,14 @@ module HashGeneratorDatapath #(
     );
 
     // This multiplexer selects the word m based on two bits from the random generator module.
-    Multiplexer #(.INP_NUMBER(4), .SIZE(WORD)) Mux1(
+    Multiplexer4 Mux1(
         .inp(mux1Inp),
         .sel(randIn),
         .out(mux1Out)
     );
 
     // This counter counts 64 times to run the main for loop.
-    Counter #(.SIZE(6)) Cnt6(
+    Counter6 Cnt6(
         .clk(clk),
         .rst(rst),
         .load(initCnt6),
@@ -113,7 +111,7 @@ module HashGeneratorDatapath #(
     );
 
     // Register F : it use B, C, D and A to update B
-    Register #(.SIZE(WORD)) F(
+    Register F(
         .clk(clk),
         .rst(rst),
         .inp(fInp),
@@ -121,21 +119,21 @@ module HashGeneratorDatapath #(
         .en(enF)
     );
 
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Muxf(
+    Multiplexer2 Muxf(
         .inp(muxFInp),
         .sel(fSel),
         .out(fInp)    
     );
 
     // A module that rotates F based on the step selected by the level of the main loop.
-    Multiplier #(.WIDTH(WORD)) Multiplier_(
+    Multiplier Multiplier_(
         .dataIn(fOut),
         .dataOut(rotateOut)
     );
 
 
     // This counter is used to calculate F = F + A + constant[i] + M[rnd] in four steps.
-    Counter #(.SIZE(2)) Cnt2(
+    Counter2 Cnt2(
         .clk(clk),
         .rst(rst),
         .load(initCnt2),
@@ -146,34 +144,34 @@ module HashGeneratorDatapath #(
     );
 
     // It has four Input: 0: constant[i], 1: M[rnd], 2: 0, 3: A .
-    Multiplexer #(.INP_NUMBER(4), .SIZE(WORD)) Mux2(
+    Multiplexer4 Mux2(
         .inp(mux2Inp),
         .sel(cnt2Out),
         .out(mux2Out)
     );
 
     // We need the adder twice — once for F and once for B. We use this multiplexer to achieve that.
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Mux3(
+    Multiplexer2 Mux3(
         .inp(mux3Inp),
         .sel(addSl),
         .out(mux3Out)
     );
 
     // This multiplexer is used to choose between the Multiplierd to be added with B, or  Mux2 to be added with F.
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Muxsl(
+    Multiplexer2 Muxsl(
         .inp(muxSlInp),
         .sel(sl),
         .out(muxSlOut)
     );
 
-    Adder #(.SIZE(WORD)) Adder_(
+    Adder Adder_(
         .a(mux3Out),
         .b(muxSlOut),
         .out(adderOut)
     );
 
     // A, B, C, D Registers that always keep hash value.
-    Register #(WORD) A(
+    Register A(
         .clk(clk),
         .rst(rst),
         .inp(inpA),
@@ -181,7 +179,7 @@ module HashGeneratorDatapath #(
         .en(hashEn)
     );
 
-    Register #(WORD) B(
+    Register B(
         .clk(clk),
         .rst(rst),
         .inp(inpB),
@@ -189,7 +187,7 @@ module HashGeneratorDatapath #(
         .en(hashEn)
     );
 
-    Register #(WORD) C(
+    Register C(
         .clk(clk),
         .rst(rst),
         .inp(inpC),
@@ -197,7 +195,7 @@ module HashGeneratorDatapath #(
         .en(hashEn)
     );
 
-    Register #(WORD) D(
+    Register D(
         .clk(clk),
         .rst(rst),
         .inp(inpD),
@@ -206,32 +204,32 @@ module HashGeneratorDatapath #(
     );
 
     // This multiplexer select which logic will update the F register.
-    Multiplexer #(.INP_NUMBER(4), .SIZE(WORD)) Mux4(
+    Multiplexer4 Mux4(
         .inp(mux4Inp),
         .sel(cnt6Out[5:4]),
         .out(mux4Out)
     );
 
     // These multiplexers select between the initial value and the updated value of A, B, C, D.
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Mux5(
+    Multiplexer2 Mux5(
         .inp(mux5Inp),
         .sel(initReg),
         .out(inpA)    
     );
 
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Mux6(
+    Multiplexer2 Mux6(
         .inp(mux6Inp),
         .sel(initReg),
         .out(inpB)
     );
 
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Mux7(
+    Multiplexer2 Mux7(
         .inp(mux7Inp),
         .sel(initReg),
         .out(inpC)
     );
 
-    Multiplexer #(.INP_NUMBER(2), .SIZE(WORD)) Mux8(
+    Multiplexer2 Mux8(
         .inp(mux8Inp),
         .sel(initReg),
         .out(inpD)

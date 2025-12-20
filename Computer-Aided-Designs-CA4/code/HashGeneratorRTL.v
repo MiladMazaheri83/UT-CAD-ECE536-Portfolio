@@ -1,6 +1,4 @@
-module HashGenerator  #(
-    parameter SIZE = 128
-) (
+module HashGenerator(
     clk,
     rst,
     inp,
@@ -13,6 +11,7 @@ module HashGenerator  #(
     done
 );
 
+    localparam SIZE = 32;
     localparam WORD = (SIZE / 4);
     input wire clk, rst, start;
     input wire [SIZE-1:0] inp;
@@ -25,7 +24,7 @@ module HashGenerator  #(
     wire [1:0] randIn;
     wire [5:0] cnt6Out;
 
-    HashGeneratorDatapath #(.SIZE(SIZE)) HG_dp (
+    HashGeneratorDatapath HG_dp (
         .clk(clk),
         .rst(rst),
         .aInit(aInit),

@@ -159,7 +159,7 @@ def map_lut2_to_cell(lut, cell_type, widths) -> Optional[str]:
     if cell_type == "c2":
         return (f"c2 {lut['name']} (\n"
             f"    .D00(1'b{bit0}), .D01(1'b{bit1}), .D10(1'b{bit2}), .D11(1'b{bit3}),\n"
-            f"    .A1({a_signal}), .B1({0}), .A0({b_signal}), .B0({1}),\n" 
+            f"    .A1({a_signal}), .B1(1'b{0}), .A0({b_signal}), .B0(1'b{1}),\n" 
             f"    .out({lut['output']})\n"
             f");")
 
@@ -168,7 +168,7 @@ def map_lut2_to_cell(lut, cell_type, widths) -> Optional[str]:
     return (f"c1 {lut['name']} (\n"
                 f"    .A0(1'b{bit0}), .A1(1'b{bit1}), .SA({b_signal}),\n"
                 f"    .B0(1'b{bit2}), .B1(1'b{bit3}), .SB({b_signal}),\n"
-                f"    .S0({a_signal}), .S1({0}), .f({lut['output']})\n"
+                f"    .S0({a_signal}), .S1(1'b{0}), .f({lut['output']})\n"
                 f");")
     
 
@@ -195,14 +195,14 @@ def map_lut1_to_cell(lut, cell_type, widths) -> Optional[str]:
     if cell_type == "c2":
         return (f"c2 {lut['name']} (\n"
             f"    .D00(1'b{bit0}), .D01(1'b{bit1}), .D10(1'b{0}), .D11(1'b{0}),\n"
-            f"    .A1({0}), .B1({0}), .A0({a}), .B0({1}),\n"  
+            f"    .A1(1'b{0}), .B1(1'b{0}), .A0({a}), .B0(1'b{1}),\n"  
             f"    .out({lut['output']})\n"
             f");")
 
     return (f"c1 {lut['name']} (\n"
             f"    .A0(1'b{bit0}), .A1(1'b{bit1}), .SA(1'b{a}),\n"
             f"    .B0(1'b{0}), .B1(1'b{0}), .SB(1'b{0}),\n"
-            f"    .S0({0}), .S1({0}), .f({lut['output']})\n"
+            f"    .S0(1'b{0}), .S1(1'b{0}), .f({lut['output']})\n"
             f");")
 
 # ---------- FF mapping ----------

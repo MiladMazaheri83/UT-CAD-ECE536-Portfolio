@@ -23,33 +23,47 @@ module RandomGeneratorController(
 
     reg [2:0] ps, ns;
 
-    always @(posedge clk or posedge rst) begin
+    always @(posedge clk) begin
         if (rst)
-            ps = S0;
+            ps <= S0;
         else
             ps <= ns;
     end
 
-    always @(*) begin
-        {ldCnt3, enCnt3, shiftP1, loadP1, doneRnd} = 5'b0;
+    always @(posedge clk) begin
+        // default outputs
+        ldCnt3  <= 1'b0;
+        enCnt3  <= 1'b0;
+        shiftP1 <= 1'b0;
+        loadP1  <= 1'b0;
+        doneRnd <= 1'b0;
 
-        case (ps)
-        
-            S0: ;
+        case (ns)
+            S0: begin
+            end
 
-            S1: ;
+            S1: begin
+            end
 
-            S2: {ldCnt3, loadP1} = 2'b11;
+            S2: begin
+                ldCnt3 <= 1'b1;
+                loadP1 <= 1'b1;
+            end
 
-            S3: {shiftP1, enCnt3} = 2'b11;
+            S3: begin
+                shiftP1 <= 1'b1;
+                enCnt3  <= 1'b1;
+            end
 
-            S4: {doneRnd} = 1'b1;
-
+            S4: begin
+                doneRnd <= 1'b1;
+            end
         endcase
     end
 
 
     always @(*) begin
+        ns = ps;
         case (ps)
 
             S0: ns = startRnd ? S1 : S0;
@@ -61,6 +75,8 @@ module RandomGeneratorController(
             S3: ns = co3 ? S4 : S3;
 
             S4: ns = S0;
+
+            default: ns = S0;
 
         endcase
     end
