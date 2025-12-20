@@ -113,9 +113,10 @@ module Counter6 #(
         end
         else if (enCnt) begin
             cntOut <= cntOut + 1;
-        end
+        end else begin
         // hold state
         cntOut <= cntOut;
+        end
     end
 
     assign co = &{cntOut};
@@ -148,9 +149,10 @@ module Counter2 #(
         end
         else if (enCnt) begin
             cntOut <= cntOut + 1;
-        end
+        end else begin
         // hold state
         cntOut <= cntOut;
+        end
     end
 
     assign co = &{cntOut};
@@ -184,8 +186,10 @@ module Counter3 #(
         else if (enCnt) begin
             cntOut <= cntOut + 1;
         end
+        else begin
         // hold state
         cntOut <= cntOut;
+        end
     end
 
     assign co = &{cntOut};

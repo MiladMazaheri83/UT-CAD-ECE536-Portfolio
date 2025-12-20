@@ -30,14 +30,14 @@ module HashGeneratorDatapath(
     input wire enF, addSl, sl, fSel;
     input wire [WORD-1:0] aInit, bInit, cInit, dInit;
     input [1:0] randIn;
-    input [15:0] inp;
-    output [15:0] out;
+    input [31:0] inp;
+    output [31:0] out;
     output [5:0] cnt6Out;
     output wire co6;
     output wire co2;
 
     wire [WORD-1:0] m00Out, m01Out, m10Out, m11Out, mux1Out, inpA, inpB, inpC, inpD, aOut, bOut, cOut, dOut;
-    wire [WORD-1:0] romOut, fOut, mux4Out, rotateOut, mux2Out, mux3Out, muxSlOut, adderOut, fInp;
+    wire [WORD-1:0] romOut, fOut, mux4Out, multOut, mux2Out, mux3Out, muxSlOut, adderOut, fInp;
     wire [WORD*4-1:0] mux1Inp;
     wire [WORD*4-1:0] mux2Inp;
     wire [WORD*4-1:0] mux4Inp;
@@ -128,7 +128,7 @@ module HashGeneratorDatapath(
     // A module that rotates F based on the step selected by the level of the main loop.
     Multiplier Multiplier_(
         .dataIn(fOut),
-        .dataOut(rotateOut)
+        .dataOut(multOut)
     );
 
 
@@ -240,7 +240,7 @@ module HashGeneratorDatapath(
 
     assign mux2Inp = {aOut, {WORD{1'b0}}, mux1Out, romOut};
 
-    assign mux3Inp = {rotateOut, mux2Out};
+    assign mux3Inp = {multOut, mux2Out};
 
     // Logical gates definition
     assign mux4Inp = {(cOut ^ (bOut | (~dOut))), (bOut ^ cOut ^ dOut), ((dOut & bOut) | ((~dOut) & cOut)), ((bOut & cOut) | ((~bOut) & dOut))};
