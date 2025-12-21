@@ -38,9 +38,10 @@ module RandomGeneratorDatapath(
 
         else if (shiftP1) begin
             dataReg <= {dataReg[4:0], sIn};
-        end
+        end else begin
         // hold state
         dataReg <= dataReg;
+        end
     end
 
 
