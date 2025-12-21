@@ -1,0 +1,991 @@
+  Optimizing cells in module \HashGenerator.
+  Optimizing cells in module \HashGeneratorController.
+  Optimizing cells in module \HashGeneratorDatapath.
+  Optimizing cells in module \MemoryBlock.
+    Consolidated identical input bits for $mux cell $memory\rom$rdmux[0][4][11]$702:
+      Old ports: A={ $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] 1'1 }, B={ $memory\rom$rdmux[0][4][0]$a$670 [5] 1'1 $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [2] }, Y={ $memory\rom$rdmux[0][3][5]$b$662 [7:6] $memory\rom$rdmux[0][3][5]$b$662 [4] $memory\rom$rdmux[0][3][5]$b$662 [2] $memory\rom$rdmux[0][3][5]$b$662 [0] }
+      New ports: A={ $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [2] 1'1 }, B={ $memory\rom$rdmux[0][4][0]$a$670 [5] 1'1 $memory\rom$rdmux[0][4][0]$a$670 [2] }, Y={ $memory\rom$rdmux[0][3][5]$b$662 [7:6] $memory\rom$rdmux[0][3][5]$b$662 [0] }
+      New connections: { $memory\rom$rdmux[0][3][5]$b$662 [4] $memory\rom$rdmux[0][3][5]$b$662 [2] } = { $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] }
+    Consolidated identical input bits for $mux cell $memory\rom$rdmux[0][4][3]$678:
+      Old ports: A={ $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] 2'01 $memory\rom$rdmux[0][4][0]$a$670 [2] }, B={ $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] 1'0 $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] }, Y={ $memory\rom$rdmux[0][3][1]$b$650 [7] $memory\rom$rdmux[0][3][1]$b$650 [5:3] $memory\rom$rdmux[0][3][1]$b$650 [1:0] }
+      New ports: A={ $memory\rom$rdmux[0][4][0]$a$670 [2] $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] 2'01 }, B={ $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [2] 1'0 $memory\rom$rdmux[0][4][0]$a$670 [5] $memory\rom$rdmux[0][4][0]$a$670 [5] }, Y={ $memory\rom$rdmux[0][3][1]$b$650 [7] $memory\rom$rdmux[0][3][1]$b$650 [5:3] $memory\rom$rdmux[0][3][1]$b$650 [1] }
+      New connections: $memory\rom$rdmux[0][3][1]$b$650 [0] = $memory\rom$rdmux[0][4][0]$a$670 [2]
+    Consolidated identical input bits for $mux cell $memory\rom$rdmux[0][4][7]$690:
+      Old ports: A={ $memory\rom$rdmux[0][4][0]$b$671 [5] $memory\rom$rdmux[0][4][0]$b$671 [5] $memory\rom$rdmux[0][4][0]$b$671 [5:4] 1'0 $memory\rom$rdmux[0][4][0]$b$671 [4] }, B={ 1'0 $memory\rom$rdmux[0][4][0]$b$671 [4] 2'10 $memory\rom$rdmux[0][4][0]$b$671 [5:4] }, Y={ $memory\rom$rdmux[0][3][3]$b$656 [5] $memory\rom$rdmux[0][3][3]$b$656 [6] $memory\rom$rdmux[0][3][3]$b$656 [7] $memory\rom$rdmux[0][3][3]$b$656 [2:0] }
+      New ports: A={ $memory\rom$rdmux[0][4][0]$b$671 [5] $memory\rom$rdmux[0][4][0]$b$671 [5] $memory\rom$rdmux[0][4][0]$b$671 [5:4] 1'0 }, B={ 1'0 $memory\rom$rdmux[0][4][0]$b$671 [4] 2'10 $memory\rom$rdmux[0][4][0]$b$671 [5] }, Y={ $memory\rom$rdmux[0][3][3]$b$656 [5] $memory\rom$rdmux[0][3][3]$b$656 [6] $memory\rom$rdmux[0][3][3]$b$656 [7] $memory\rom$rdmux[0][3][3]$b$656 [2:1] } 
+      New connections: $memory\rom$rdmux[0][3][3]$b$656 [0] = $memory\rom$rdmux[0][4][0]$b$671 [4]
+  Optimizing cells in module \MemoryBlock.
+  Optimizing cells in module \Multiplexer2.
+  Optimizing cells in module \Multiplexer4.
+  Optimizing cells in module \Multiplier.
+  Optimizing cells in module \RandomGenerator.
+  Optimizing cells in module \RandomGeneratorController.
+  Optimizing cells in module \RandomGeneratorDatapath.
+  Optimizing cells in module \Register.
+Performed a total of 3 changes.
+
+10.20.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Adder'.
+Finding identical cells in module `\Counter2'.
+Finding identical cells in module `\Counter3'.
+Finding identical cells in module `\Counter6'.
+Finding identical cells in module `\HashGenerator'.
+Finding identical cells in module `\HashGeneratorController'.
+Finding identical cells in module `\HashGeneratorDatapath'.
+Finding identical cells in module `\MemoryBlock'.
+Finding identical cells in module `\Multiplexer2'.
+Finding identical cells in module `\Multiplexer4'.
+Finding identical cells in module `\Multiplier'.
+Finding identical cells in module `\RandomGenerator'.
+Finding identical cells in module `\RandomGeneratorController'.
+Finding identical cells in module `\RandomGeneratorDatapath'.
+Finding identical cells in module `\Register'.
+Removed a total of 0 cells.
+
+10.20.14. Executing OPT_SHARE pass.
+
+10.20.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.20.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Adder..
+Finding unused cells or wires in module \Counter2..
+Finding unused cells or wires in module \Counter3..
+Finding unused cells or wires in module \Counter6..
+Finding unused cells or wires in module \HashGenerator..
+Finding unused cells or wires in module \HashGeneratorController..
+Finding unused cells or wires in module \HashGeneratorDatapath..
+Finding unused cells or wires in module \MemoryBlock..
+Finding unused cells or wires in module \Multiplexer2..
+Finding unused cells or wires in module \Multiplexer4..
+Finding unused cells or wires in module \Multiplier..
+Finding unused cells or wires in module \RandomGenerator..
+Finding unused cells or wires in module \RandomGeneratorController..
+Finding unused cells or wires in module \RandomGeneratorDatapath..
+Finding unused cells or wires in module \Register..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+10.20.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Adder.
+Optimizing module Counter2.
+Optimizing module Counter3.
+Optimizing module Counter6.
+Optimizing module HashGenerator.
+Optimizing module HashGeneratorController.
+Optimizing module HashGeneratorDatapath.
+Optimizing module MemoryBlock.
+Optimizing module Multiplexer2.
+Optimizing module Multiplexer4.
+Optimizing module Multiplier.
+Optimizing module RandomGenerator.
+Optimizing module RandomGeneratorController.
+Optimizing module RandomGeneratorDatapath.
+Optimizing module Register.
+
+10.20.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.20.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Adder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Counter2..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Counter3..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Counter6..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \HashGenerator..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \HashGeneratorController..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \HashGeneratorDatapath..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \MemoryBlock..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Multiplexer2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Multiplexer4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \Multiplier..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \RandomGenerator..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \RandomGeneratorController..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \RandomGeneratorDatapath..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \Register..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+10.20.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Adder.
+  Optimizing cells in module \Counter2.
+  Optimizing cells in module \Counter3.
+  Optimizing cells in module \Counter6.
+  Optimizing cells in module \HashGenerator.
+  Optimizing cells in module \HashGeneratorController.
+  Optimizing cells in module \HashGeneratorDatapath.
+  Optimizing cells in module \MemoryBlock.
+  Optimizing cells in module \Multiplexer2.
+  Optimizing cells in module \Multiplexer4.
+  Optimizing cells in module \Multiplier.
+  Optimizing cells in module \RandomGenerator.
+  Optimizing cells in module \RandomGeneratorController.
+  Optimizing cells in module \RandomGeneratorDatapath.
+  Optimizing cells in module \Register.
+Performed a total of 0 changes.
+
+10.20.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Adder'.
+Finding identical cells in module `\Counter2'.
+Finding identical cells in module `\Counter3'.
+Finding identical cells in module `\Counter6'.
+Finding identical cells in module `\HashGenerator'.
+Finding identical cells in module `\HashGeneratorController'.
+Finding identical cells in module `\HashGeneratorDatapath'.
+Finding identical cells in module `\MemoryBlock'.
+Finding identical cells in module `\Multiplexer2'.
+Finding identical cells in module `\Multiplexer4'.
+Finding identical cells in module `\Multiplier'.
+Finding identical cells in module `\RandomGenerator'.
+Finding identical cells in module `\RandomGeneratorController'.
+Finding identical cells in module `\RandomGeneratorDatapath'.
+Finding identical cells in module `\Register'.
+Removed a total of 0 cells.
+
+10.20.22. Executing OPT_SHARE pass.
+
+10.20.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.20.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Adder..
+Finding unused cells or wires in module \Counter2..
+Finding unused cells or wires in module \Counter3..
+Finding unused cells or wires in module \Counter6..
+Finding unused cells or wires in module \HashGenerator..
+Finding unused cells or wires in module \HashGeneratorController..
+Finding unused cells or wires in module \HashGeneratorDatapath..
+Finding unused cells or wires in module \MemoryBlock..
+Finding unused cells or wires in module \Multiplexer2..
+Finding unused cells or wires in module \Multiplexer4..
+Finding unused cells or wires in module \Multiplier..
+Finding unused cells or wires in module \RandomGenerator..
+Finding unused cells or wires in module \RandomGeneratorController..
+Finding unused cells or wires in module \RandomGeneratorDatapath..
+Finding unused cells or wires in module \Register..
+
+10.20.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Adder.
+Optimizing module Counter2.
+Optimizing module Counter3.
+Optimizing module Counter6.
+Optimizing module HashGenerator.
+Optimizing module HashGeneratorController.
+Optimizing module HashGeneratorDatapath.
+Optimizing module MemoryBlock.
+Optimizing module Multiplexer2.
+Optimizing module Multiplexer4.
+Optimizing module Multiplier.
+Optimizing module RandomGenerator.
+Optimizing module RandomGeneratorController.
+Optimizing module RandomGeneratorDatapath.
+Optimizing module Register.
+
+10.20.26. Finished OPT passes. (There is nothing left to do.)
+
+10.21. Executing TECHMAP pass (map to technology primitives).
+
+10.21.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+10.21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$d31bf4d7d72e59528d18fbd4f322e9d608532043\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper maccmap for cells of type $macc.
+  add \dataIn [3:0] * \dataIn [7:4] (4x4 bits, unsigned)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod$constmap:37b3cc4e06391b7a7ef418215dc52e2abb59f048$paramod$282e2f6c0b1116d84b8f8102ddacd7ff760b6794\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$constmap:21cc5e18f9188dbc8d1b43e8207824e8afccae11$paramod$a9fc0d63e6c38b0c69d194987a06ef4809fd51d0\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$4d45682f6d5f8751d24fc75184ef72226da353f7\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$32efbfac1c4dc57230cf86180788fdfd12e3b511\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1243 debug messages>
+
+10.22. Executing OPT pass (performing simple optimizations).
+
+10.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Adder.
+<suppressed ~12 debug messages>
+Optimizing module Counter2.
+<suppressed ~11 debug messages>
+Optimizing module Counter3.
+<suppressed ~15 debug messages>
+Optimizing module Counter6.
+<suppressed ~31 debug messages>
+Optimizing module HashGenerator.
+Optimizing module HashGeneratorController.
+<suppressed ~79 debug messages>
+Optimizing module HashGeneratorDatapath.
+Optimizing module MemoryBlock.
+<suppressed ~11 debug messages>
+Optimizing module Multiplexer2.
+<suppressed ~16 debug messages>
+Optimizing module Multiplexer4.
+<suppressed ~64 debug messages>
+Optimizing module Multiplier.
+<suppressed ~109 debug messages>
+Optimizing module RandomGenerator.
+Optimizing module RandomGeneratorController.
+<suppressed ~25 debug messages>
+Optimizing module RandomGeneratorDatapath.
+Optimizing module Register.
+
+10.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Adder'.
+Finding identical cells in module `\Counter2'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\Counter3'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\Counter6'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `\HashGenerator'.
+Finding identical cells in module `\HashGeneratorController'.
+<suppressed ~72 debug messages>
+Finding identical cells in module `\HashGeneratorDatapath'.
+Finding identical cells in module `\MemoryBlock'.
+<suppressed ~219 debug messages>
+Finding identical cells in module `\Multiplexer2'.
+Finding identical cells in module `\Multiplexer4'.
+Finding identical cells in module `\Multiplier'.
+Finding identical cells in module `\RandomGenerator'.
+Finding identical cells in module `\RandomGeneratorController'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `\RandomGeneratorDatapath'.
+Finding identical cells in module `\Register'.
+Removed a total of 114 cells.
+
+10.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Adder..
+Finding unused cells or wires in module \Counter2..
+Finding unused cells or wires in module \Counter3..
+Finding unused cells or wires in module \Counter6..
+Finding unused cells or wires in module \HashGenerator..
+Finding unused cells or wires in module \HashGeneratorController..
+Finding unused cells or wires in module \HashGeneratorDatapath..
+Finding unused cells or wires in module \MemoryBlock..
+Finding unused cells or wires in module \Multiplexer2..
+Finding unused cells or wires in module \Multiplexer4..
+Finding unused cells or wires in module \Multiplier..
+Finding unused cells or wires in module \RandomGenerator..
+Finding unused cells or wires in module \RandomGeneratorController..
+Finding unused cells or wires in module \RandomGeneratorDatapath..
+Finding unused cells or wires in module \Register..
+Removed 78 unused cells and 334 unused wires.
+<suppressed ~89 debug messages>
+
+10.22.5. Finished fast OPT passes.
+
+10.23. Executing ABC pass (technology mapping using ABC).
+
+10.23.1. Extracting gate netlist of module `\Adder' to `<abc-temp-dir>/input.blif'..
+Extracted 40 gates and 56 wires to a netlist network with 16 inputs and 8 outputs.
+
+10.23.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       40
+ABC RESULTS:        internal signals:       32
+ABC RESULTS:           input signals:       16
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.2. Extracting gate netlist of module `\Counter2' to `<abc-temp-dir>/input.blif'..
+Extracted 6 gates and 12 wires to a netlist network with 6 inputs and 4 outputs.
+
+10.23.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.2.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:        9
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+10.23.3. Extracting gate netlist of module `\Counter3' to `<abc-temp-dir>/input.blif'..
+Extracted 9 gates and 17 wires to a netlist network with 8 inputs and 5 outputs.
+
+10.23.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.3.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       14
+ABC RESULTS:        internal signals:        4
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+10.23.4. Extracting gate netlist of module `\Counter6' to `<abc-temp-dir>/input.blif'..
+Extracted 20 gates and 34 wires to a netlist network with 14 inputs and 8 outputs.
+
+10.23.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.4.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       31
+ABC RESULTS:        internal signals:       12
+ABC RESULTS:           input signals:       14
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.5. Extracting gate netlist of module `\HashGenerator' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+10.23.6. Extracting gate netlist of module `\HashGeneratorController' to `<abc-temp-dir>/input.blif'..
+Extracted 103 gates and 119 wires to a netlist network with 15 inputs and 19 outputs.
+
+10.23.6.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.6.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       79
+ABC RESULTS:        internal signals:       85
+ABC RESULTS:           input signals:       15
+ABC RESULTS:          output signals:       19
+Removing temp directory.
+
+10.23.7. Extracting gate netlist of module `\HashGeneratorDatapath' to `<abc-temp-dir>/input.blif'..
+Extracted 96 gates and 120 wires to a netlist network with 24 inputs and 32 outputs.
+
+10.23.7.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.7.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       72
+ABC RESULTS:        internal signals:       64
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+
+10.23.8. Extracting gate netlist of module `\MemoryBlock' to `<abc-temp-dir>/input.blif'..
+Extracted 134 gates and 143 wires to a netlist network with 7 inputs and 8 outputs.
+
+10.23.8.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.8.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:      261
+ABC RESULTS:        internal signals:      128
+ABC RESULTS:           input signals:        7
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.9. Extracting gate netlist of module `\Multiplexer2' to `<abc-temp-dir>/input.blif'..
+Extracted 8 gates and 25 wires to a netlist network with 17 inputs and 8 outputs.
+
+10.23.9.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.9.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       24
+ABC RESULTS:        internal signals:        0
+ABC RESULTS:           input signals:       17
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.10. Extracting gate netlist of module `\Multiplexer4' to `<abc-temp-dir>/input.blif'..
+Extracted 24 gates and 58 wires to a netlist network with 34 inputs and 8 outputs.
+
+10.23.10.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.10.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       72
+ABC RESULTS:        internal signals:       16
+ABC RESULTS:           input signals:       34
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.11. Extracting gate netlist of module `\Multiplier' to `<abc-temp-dir>/input.blif'..
+Extracted 67 gates and 75 wires to a netlist network with 8 inputs and 8 outputs.
+
+10.23.11.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.11.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       67
+ABC RESULTS:        internal signals:       59
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.12. Extracting gate netlist of module `\RandomGenerator' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+10.23.13. Extracting gate netlist of module `\RandomGeneratorController' to `<abc-temp-dir>/input.blif'..
+Extracted 47 gates and 56 wires to a netlist network with 8 inputs and 8 outputs.
+
+10.23.13.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.13.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       34
+ABC RESULTS:        internal signals:       40
+ABC RESULTS:           input signals:        8
+ABC RESULTS:          output signals:        8
+Removing temp directory.
+
+10.23.14. Extracting gate netlist of module `\RandomGeneratorDatapath' to `<abc-temp-dir>/input.blif'..
+Extracted 9 gates and 23 wires to a netlist network with 14 inputs and 7 outputs.
+
+10.23.14.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC:
+ABC: + read_blif <abc-temp-dir>/input.blif
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash
+ABC: + dretime 
+ABC: + if
+ABC: + write_blif <abc-temp-dir>/output.blif
+
+10.23.14.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       21
+ABC RESULTS:        internal signals:        2
+ABC RESULTS:           input signals:       14
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+
+10.23.15. Extracting gate netlist of module `\Register' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+10.24. Executing OPT pass (performing simple optimizations).
+
+10.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Adder.
+Optimizing module Counter2.
+Optimizing module Counter3.
+Optimizing module Counter6.
+Optimizing module HashGenerator.
+Optimizing module HashGeneratorController.
+Optimizing module HashGeneratorDatapath.
+Optimizing module MemoryBlock.
+Optimizing module Multiplexer2.
+Optimizing module Multiplexer4.
+Optimizing module Multiplier.
+Optimizing module RandomGenerator.
+Optimizing module RandomGeneratorController.
+Optimizing module RandomGeneratorDatapath.
+Optimizing module Register.
+
+10.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Adder'.
+Finding identical cells in module `\Counter2'.
+Finding identical cells in module `\Counter3'.
+Finding identical cells in module `\Counter6'.
+Finding identical cells in module `\HashGenerator'.
+Finding identical cells in module `\HashGeneratorController'.
+Finding identical cells in module `\HashGeneratorDatapath'.
+Finding identical cells in module `\MemoryBlock'.
+<suppressed ~21 debug messages>
+Finding identical cells in module `\Multiplexer2'.
+Finding identical cells in module `\Multiplexer4'.
+Finding identical cells in module `\Multiplier'.
+Finding identical cells in module `\RandomGenerator'.
+Finding identical cells in module `\RandomGeneratorController'.
+Finding identical cells in module `\RandomGeneratorDatapath'.
+Finding identical cells in module `\Register'.
+Removed a total of 7 cells.
+
+10.24.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Adder..
+Finding unused cells or wires in module \Counter2..
+Finding unused cells or wires in module \Counter3..
+Finding unused cells or wires in module \Counter6..
+Finding unused cells or wires in module \HashGenerator..
+Finding unused cells or wires in module \HashGeneratorController..
+Finding unused cells or wires in module \HashGeneratorDatapath..
+Finding unused cells or wires in module \MemoryBlock..
+Finding unused cells or wires in module \Multiplexer2..
+Finding unused cells or wires in module \Multiplexer4..
+Finding unused cells or wires in module \Multiplier..
+Finding unused cells or wires in module \RandomGenerator..
+Finding unused cells or wires in module \RandomGeneratorController..
+Finding unused cells or wires in module \RandomGeneratorDatapath..
+Finding unused cells or wires in module \Register..
+Removed 0 unused cells and 453 unused wires.
+<suppressed ~15 debug messages>
+
+10.24.5. Finished fast OPT passes.
+
+10.25. Executing HIERARCHY pass (managing design hierarchy).
+
+10.25.1. Analyzing design hierarchy..
+Top module:  \HashGenerator
+Used module:     \HashGeneratorController
+Used module:     \HashGeneratorDatapath
+Used module:         \Register
+Used module:         \Adder
+Used module:         \Counter2
+Used module:         \Counter6
+Used module:         \Multiplier
+Used module:         \Multiplexer4
+Used module:         \Multiplexer2
+Used module:         \MemoryBlock
+Used module:     \RandomGenerator
+Used module:         \RandomGeneratorController
+Used module:         \RandomGeneratorDatapath
+Used module:             \Counter3
+
+10.25.2. Analyzing design hierarchy..
+Top module:  \HashGenerator
+Used module:     \HashGeneratorController
+Used module:     \HashGeneratorDatapath
+Used module:         \Register
+Used module:         \Adder
+Used module:         \Counter2
+Used module:         \Counter6
+Used module:         \Multiplier
+Used module:         \Multiplexer4
+Used module:         \Multiplexer2
+Used module:         \MemoryBlock
+Used module:     \RandomGenerator
+Used module:         \RandomGeneratorController
+Used module:         \RandomGeneratorDatapath
+Used module:             \Counter3
+Removed 0 unused modules.
+
+10.26. Printing statistics.
+
+=== Adder ===
+
+   Number of wires:                 35
+   Number of wire bits:             56
+   Number of public wires:           3
+   Number of public wire bits:      24
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 40
+     $lut                           40
+
+=== Counter2 ===
+
+   Number of wires:                 15
+   Number of wire bits:             17
+   Number of public wires:           7
+   Number of public wire bits:       9
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 11
+     $_SDFFE_PP0P_                   2
+     $lut                            9
+
+=== Counter3 ===
+
+   Number of wires:                 20
+   Number of wire bits:             24
+   Number of public wires:           7
+   Number of public wire bits:      11
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 17
+     $_SDFFE_PP0P_                   3
+     $lut                           14
+
+=== Counter6 ===
+
+   Number of wires:                 37
+   Number of wire bits:             47
+   Number of public wires:           7
+   Number of public wire bits:      17
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 37
+     $_SDFFE_PP0P_                   6
+     $lut                           31
+
+=== HashGenerator ===
+
+   Number of wires:                 28
+   Number of wire bits:            124
+   Number of public wires:          28
+   Number of public wire bits:     124
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     HashGeneratorController         1
+     HashGeneratorDatapath           1
+     RandomGenerator                 1
+
+=== HashGeneratorController ===
+
+   Number of wires:                100
+   Number of wire bits:            109
+   Number of public wires:          21
+   Number of public wire bits:      30
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 98
+     $_DFF_P_                       19
+     $lut                           79
+
+=== HashGeneratorDatapath ===
+
+   Number of wires:                 97
+   Number of wire bits:            546
+   Number of public wires:          57
+   Number of public wire bits:     506
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 96
+     $lut                           72
+     Adder                           1
+     Counter2                        1
+     Counter6                        1
+     MemoryBlock                     1
+     Multiplexer2                    7
+     Multiplexer4                    3
+     Multiplier                      1
+     Register                        9
+
+=== MemoryBlock ===
+
+   Number of wires:                249
+   Number of wire bits:            261
+   Number of public wires:           3
+   Number of public wire bits:      15
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                254
+     $lut                          254
+
+=== Multiplexer2 ===
+
+   Number of wires:                 19
+   Number of wire bits:             41
+   Number of public wires:           3
+   Number of public wire bits:      25
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 24
+     $lut                           24
+
+=== Multiplexer4 ===
+
+   Number of wires:                 67
+   Number of wire bits:            106
+   Number of public wires:           3
+   Number of public wire bits:      42
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 72
+     $lut                           72
+
+=== Multiplier ===
+
+   Number of wires:                 61
+   Number of wire bits:             75
+   Number of public wires:           2
+   Number of public wire bits:      16
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 67
+     $lut                           67
+
+=== RandomGenerator ===
+
+   Number of wires:                 11
+   Number of wire bits:             17
+   Number of public wires:          11
+   Number of public wire bits:      17
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     RandomGeneratorController       1
+     RandomGeneratorDatapath         1
+
+=== RandomGeneratorController ===
+
+   Number of wires:                 44
+   Number of wire bits:             48
+   Number of public wires:          10
+   Number of public wire bits:      14
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 42
+     $_DFF_P_                        8
+     $lut                           34
+
+=== RandomGeneratorDatapath ===
+
+   Number of wires:                 32
+   Number of wire bits:             45
+   Number of public wires:          11
+   Number of public wire bits:      24
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 28
+     $_SDFFE_PP0P_                   6
+     $lut                           21
+     Counter3                        1
+
+=== Register ===
+
+   Number of wires:                  5
+   Number of wire bits:             19
+   Number of public wires:           5
+   Number of public wire bits:      19
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  8
+     $_SDFFE_PP0P_                   8
+
+=== design hierarchy ===
+
+   HashGenerator                     1
+     HashGeneratorController         1
+     HashGeneratorDatapath           1
+       Adder                         1
+       Counter2                      1
+       Counter6                      1
+       MemoryBlock                   1
+       Multiplexer2                  7
+       Multiplexer4                  3
+       Multiplier                    1
+       Register                      9
+     RandomGenerator                 1
+       RandomGeneratorController      1
+       RandomGeneratorDatapath       1
+         Counter3                    1
+
+   Number of wires:               1108
+   Number of wire bits:           2145
+   Number of public wires:         242
+   Number of public wire bits:    1279
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1121
+     $_DFF_P_                       27
+     $_SDFFE_PP0P_                  89
+     $lut                         1005
+
+10.27. Executing CHECK pass (checking for obvious problems).
+Checking module Adder...
+Checking module Counter2...
+Checking module Counter3...
+Checking module Counter6...
+Checking module HashGenerator...
+Checking module HashGeneratorController...
+Checking module HashGeneratorDatapath...
+Checking module MemoryBlock...
+Checking module Multiplexer2...
+Checking module Multiplexer4...
+Checking module Multiplier...
+Checking module RandomGenerator...
+Checking module RandomGeneratorController...
+Checking module RandomGeneratorDatapath...
+Checking module Register...
+Found and reported 0 problems.
+
+11. Executing Verilog backend.
+Dumping module `\Adder'.
+Dumping module `\Counter2'.
+Dumping module `\Counter3'.
+Dumping module `\Counter6'.
+Dumping module `\HashGenerator'.
+Dumping module `\HashGeneratorController'.
+Dumping module `\HashGeneratorDatapath'.
+Dumping module `\MemoryBlock'.
+Dumping module `\Multiplexer2'.
+Dumping module `\Multiplexer4'.
+Dumping module `\Multiplier'.
+Dumping module `\RandomGenerator'.
+Dumping module `\RandomGeneratorController'.
+Dumping module `\RandomGeneratorDatapath'.
+Dumping module `\Register'.
+
+End of script. Logfile hash: 25b8fbc2ec, CPU: user 0.52s system 0.05s, MEM: 18.12 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 51% 1x abc (0 sec), 11% 29x opt_expr (0 sec), ...
