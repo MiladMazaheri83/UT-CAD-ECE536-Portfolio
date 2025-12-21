@@ -33,7 +33,7 @@ module HashGeneratorTestBench;
         inp = 32'h3761eded;
         start = 1; #10; start = 0;
         
-        #10000;
+        #11000;
 
         $stop;
     end

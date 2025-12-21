@@ -1,5 +1,5 @@
 module MemoryBlock #(
-    parameter WIDTH = 8,
+    parameter WIDTH  = 8,
     parameter HEIGHT = 64
 ) (
     input  wire        read,
@@ -10,70 +10,70 @@ module MemoryBlock #(
     reg [WIDTH-1:0] rom [0:HEIGHT-1];
 
     initial begin
-        rom[0]  = 16'ha478;
-        rom[1]  = 16'hb756;
-        rom[2]  = 16'h70db;
-        rom[3]  = 16'hceee;
-        rom[4]  = 16'h0faf;
-        rom[5]  = 16'hc62a;
-        rom[6]  = 16'h4613;
-        rom[7]  = 16'h9501;
-        rom[8]  = 16'h98d8;
-        rom[9]  = 16'hf7af;
-        rom[10] = 16'h5bb1;
-        rom[11] = 16'hd7be;
-        rom[12] = 16'h1122;
-        rom[13] = 16'h7193;
-        rom[14] = 16'h438e;
-        rom[15] = 16'h0821;
-        rom[16] = 16'h2562;
-        rom[17] = 16'hb340;
-        rom[18] = 16'h5a51;
-        rom[19] = 16'hc7aa;
-        rom[20] = 16'h105d;
-        rom[21] = 16'h1453;
-        rom[22] = 16'he681;
-        rom[23] = 16'hfbc8;
-        rom[24] = 16'hcde6;
-        rom[25] = 16'h07d6;
-        rom[26] = 16'h0d87;
-        rom[27] = 16'h14ed;
-        rom[28] = 16'he905;
-        rom[29] = 16'ha3f8;
-        rom[30] = 16'h02d9;
-        rom[31] = 16'h4c8a;
-        rom[32] = 16'h3942;
-        rom[33] = 16'hf681;
-        rom[34] = 16'h6122;
-        rom[35] = 16'h380c;
-        rom[36] = 16'hea44;
-        rom[37] = 16'hcfa9;
-        rom[38] = 16'h4b60;
-        rom[39] = 16'hbc70;
-        rom[40] = 16'h7ec6;
-        rom[41] = 16'h27fa;
-        rom[42] = 16'h3085;
-        rom[43] = 16'h1d05;
-        rom[44] = 16'hd039;
-        rom[45] = 16'h99e5;
-        rom[46] = 16'h7cf8;
-        rom[47] = 16'h5665;
-        rom[48] = 16'h2244;
-        rom[49] = 16'hff97;
-        rom[50] = 16'h23a7;
-        rom[51] = 16'ha039;
-        rom[52] = 16'h59c3;
-        rom[53] = 16'hcc92;
-        rom[54] = 16'hf47d;
-        rom[55] = 16'h5dd1;
-        rom[56] = 16'h7e4f;
-        rom[57] = 16'he6e0;
-        rom[58] = 16'h4314;
-        rom[59] = 16'h11a1;
-        rom[60] = 16'h7e82;
-        rom[61] = 16'hf235;
-        rom[62] = 16'hd2bb;
-        rom[63] = 16'hd391;
+        rom[0]  = 8'h78;
+        rom[1]  = 8'h56;
+        rom[2]  = 8'hdb;
+        rom[3]  = 8'hee;
+        rom[4]  = 8'haf;
+        rom[5]  = 8'h2a;
+        rom[6]  = 8'h13;
+        rom[7]  = 8'h01;
+        rom[8]  = 8'hd8;
+        rom[9]  = 8'haf;
+        rom[10] = 8'hb1;
+        rom[11] = 8'hbe;
+        rom[12] = 8'h22;
+        rom[13] = 8'h93;
+        rom[14] = 8'h8e;
+        rom[15] = 8'h21;
+        rom[16] = 8'h62;
+        rom[17] = 8'h40;
+        rom[18] = 8'h51;
+        rom[19] = 8'haa;
+        rom[20] = 8'h5d;
+        rom[21] = 8'h53;
+        rom[22] = 8'h81;
+        rom[23] = 8'hc8;
+        rom[24] = 8'he6;
+        rom[25] = 8'hd6;
+        rom[26] = 8'h87;
+        rom[27] = 8'hed;
+        rom[28] = 8'h05;
+        rom[29] = 8'hf8;
+        rom[30] = 8'hd9;
+        rom[31] = 8'h8a;
+        rom[32] = 8'h42;
+        rom[33] = 8'h81;
+        rom[34] = 8'h22;
+        rom[35] = 8'h0c;
+        rom[36] = 8'h44;
+        rom[37] = 8'ha9;
+        rom[38] = 8'h60;
+        rom[39] = 8'h70;
+        rom[40] = 8'hc6;
+        rom[41] = 8'hfa;
+        rom[42] = 8'h85;
+        rom[43] = 8'h05;
+        rom[44] = 8'h39;
+        rom[45] = 8'he5;
+        rom[46] = 8'hf8;
+        rom[47] = 8'h65;
+        rom[48] = 8'h44;
+        rom[49] = 8'h97;
+        rom[50] = 8'ha7;
+        rom[51] = 8'h39;
+        rom[52] = 8'hc3;
+        rom[53] = 8'h92;
+        rom[54] = 8'h7d;
+        rom[55] = 8'hd1;
+        rom[56] = 8'h4f;
+        rom[57] = 8'he0;
+        rom[58] = 8'h14;
+        rom[59] = 8'ha1;
+        rom[60] = 8'h82;
+        rom[61] = 8'h35;
+        rom[62] = 8'hbb;
+        rom[63] = 8'h91;
     end
 
     always @(*) begin
@@ -83,8 +83,6 @@ module MemoryBlock #(
             dataOut = {WIDTH{1'b0}};
     end
 endmodule
-
-
 
 
 module Counter6 #(
