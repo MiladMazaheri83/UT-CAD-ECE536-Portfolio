@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
-from .dfg_creator import BaseNode, OperatorNode, OP_TYPES
-from typing import List
+from .dfg_creator import BaseNode, OperatorNode, IdentifierNode, OP_TYPES
+from typing import List, Dict, Set
 
 class ScheduledNodeInfo:
     def __init__(self, node : OperatorNode, scheduled_time : int, resource_num : int):
         self.node = node
         self.scheduled_time = scheduled_time
         self.resource_num = resource_num
-
 
 class ListScheduler(ABC):
     def __init__(self, dfg_root : BaseNode, numof_reources : dict):
@@ -18,7 +17,42 @@ class ListScheduler(ABC):
             self.numof_resources = numof_reources
 
         self.scheduled_nodes_info : List[ScheduledNodeInfo] = []
+        
+        # Shared state for tracking scheduled nodes
+        self.scheduled_ids : Set[int] = set()
+        
+        # Shared helper to get all nodes (useful for both algorithms)
+        self.all_operators : List[OperatorNode] = self._get_all_operators(self.root)
 
+    def _get_all_operators(self, node: BaseNode) -> List[OperatorNode]:
+        """ Helper to retrieve all unique OperatorNodes in the graph. """
+        ops = []
+        visited = set()
+        
+        def dfs(n):
+            if n is None or n.id in visited:
+                return
+            visited.add(n.id)
+            
+            # Recurse on children first
+            for op in n.operands:
+                dfs(op)
+                
+            if isinstance(n, OperatorNode):
+                ops.append(n)
+        
+        dfs(node)
+        return ops
+
+    def is_node_ready(self, node: OperatorNode) -> bool:
+        """ Check if a node's operands are all ready. """
+        for operand in node.operands:
+            if isinstance(operand, IdentifierNode):
+                continue # Inputs are always ready
+            elif isinstance(operand, OperatorNode):
+                if operand.id not in self.scheduled_ids:
+                    return False
+        return True
 
     '''
         For a node, records its execution cycle and index of the resource to be executed on.
@@ -26,14 +60,13 @@ class ListScheduler(ABC):
     def record_scheduled_node(self, node : OperatorNode, scheduled_time : int, resource_num : int):
         recorded_info = ScheduledNodeInfo(node=node, scheduled_time=scheduled_time, resource_num=resource_num)
         self.scheduled_nodes_info.append(recorded_info)
-
+        self.scheduled_ids.add(node.id)
 
     '''
         Returns the list of all ScheduledNodeInfos sorted by their node id.
     '''
     def get_scheduling_info(self) -> List[ScheduledNodeInfo]:
         return sorted(self.scheduled_nodes_info, key = lambda node_info: node_info.node.id)
-
 
     '''
         Returns a list of nodes that are ready to execute at the time.
@@ -43,7 +76,6 @@ class ListScheduler(ABC):
     def find_candidate_nodes(self) -> List[OperatorNode]:
         pass
 
-
     '''
         Based on the algorithm, it selects nodes from frontier to be executed on the currently available resources.
         Frontier is the output of find_candidate_nodes.
@@ -52,14 +84,14 @@ class ListScheduler(ABC):
     def select_from_frontier(self, frontier : dict) -> List[OperatorNode]:
         pass
 
-
     '''
         Performes the process of scheduling.
-        It repeatedly selects some nodes from frontier to be executed at the time and records their scheduling information until there are no more nodes. 
+        It repeatedly selects some nodes from frontier to be executed at the time and records their scheduling information until there are no more nodes.
     '''
     @abstractmethod
     def schedule(self) -> None:
         pass
+
 
 
 
