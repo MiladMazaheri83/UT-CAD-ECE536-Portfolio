@@ -43,9 +43,10 @@ def schedule_dfg(dfg_root, algorithm : str, config : dict, folder_path : str) ->
     Save the reuslting code files to:
         - "{folder_path}/codes/datapath.v"
         - "{folder_path}/codes/controller.v"
+        - "{folder_path}/codes/top.v"
 '''
-def generate_verilog(folder_path : str, schedule_info : list[ScheduledNodeInfo]):
-    generator = VerilogGenerator(schedule_info)
+def generate_verilog(folder_path : str, schedule_info : list[ScheduledNodeInfo], dfg_root):
+    generator = VerilogGenerator(schedule_info, dfg_root)
     generator.write_files(folder_path)
 
 def save_result(folder_path : str, schedule_info : list[ScheduledNodeInfo]):
@@ -69,7 +70,7 @@ def run_test(folder_path : str):
 
     save_result(folder_path=folder_path, schedule_info=schedule_info)
 
-    generate_verilog(folder_path=folder_path, schedule_info=schedule_info)
+    generate_verilog(folder_path=folder_path, schedule_info=schedule_info, dfg_root=dfg_root)
 
 def main():
     if len(sys.argv) > 1:
