@@ -17,6 +17,12 @@ class ListScheduler(ABC):
             self.numof_resources = numof_reources
 
         self.scheduled_nodes_info : List[ScheduledNodeInfo] = []
+        
+        # Shared state for tracking scheduled nodes
+        self.scheduled_ids : Set[int] = set()
+        
+        # Shared helper to get all nodes (useful for both algorithms)
+        self.all_operators : List[OperatorNode] = self._get_all_operators(self.root)
 
     '''
         For a node, records its execution cycle and index of the resource to be executed on.
