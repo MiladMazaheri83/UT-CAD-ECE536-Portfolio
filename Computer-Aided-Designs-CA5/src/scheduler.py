@@ -1,6 +1,7 @@
+import sys
 from abc import ABC, abstractmethod
-from .dfg_creator import BaseNode, OperatorNode, IdentifierNode, OP_TYPES
-from typing import List, Dict, Set
+from .dfg_creator import BaseNode, OperatorNode, OP_TYPES, IdentifierNode
+from typing import List, Set
 
 class ScheduledNodeInfo:
     def __init__(self, node : OperatorNode, scheduled_time : int, resource_num : int):
@@ -14,72 +15,55 @@ class ListScheduler(ABC):
         if numof_resources is None:
             self.numof_resources = {op: 1 for op in OP_TYPES}
         else:
-            self.numof_resources = numof_resources
+            self.numof_resources = numof_resources.copy()
 
         self.scheduled_nodes_info : List[ScheduledNodeInfo] = []
         self.scheduled_ids : Set[int] = set()
-        self.all_operators : List[OperatorNode] = self._get_all_operators(self.root)
 
-    def _get_all_operators(self, node: BaseNode) -> List[OperatorNode]:
-        """ Helper to retrieve all unique OperatorNodes in the graph. """
-        ops = []
-        visited = set()
-        
-        def dfs(n):
-            if n is None or n.id in visited:
-                return
-            visited.add(n.id)
-            
-            for op in n.operands:
-                dfs(op)
-                
-            if isinstance(n, OperatorNode):
-                ops.append(n)
-        
-        dfs(node)
-        return ops
-
-    def is_node_ready(self, node: OperatorNode) -> bool:
-        """ Check if a node's operands are all ready. """
-        for operand in node.operands:
-            if isinstance(operand, IdentifierNode):
-                continue # Inputs are always ready
-            elif isinstance(operand, OperatorNode):
-                if operand.id not in self.scheduled_ids:
-                    return False
-        return True
-
-    '''
-        For a node, records its execution cycle and index of the resource to be executed on.
-    '''
     def record_scheduled_node(self, node : OperatorNode, scheduled_time : int, resource_num : int):
         recorded_info = ScheduledNodeInfo(node=node, scheduled_time=scheduled_time, resource_num=resource_num)
         self.scheduled_nodes_info.append(recorded_info)
         self.scheduled_ids.add(node.id)
 
-    '''
-        Returns the list of all ScheduledNodeInfos sorted by their node id.
-    '''
     def get_scheduling_info(self) -> List[ScheduledNodeInfo]:
         return sorted(self.scheduled_nodes_info, key = lambda node_info: node_info.node.id)
 
-    '''
-        Returns a list of nodes that are ready to execute at the time.
-    '''
+    def _get_all_operators(self) -> List[OperatorNode]:
+        """ Helper: Returns a list of all OperatorNodes in the graph (DFS) """
+        operators = []
+        visited = set()
+        
+        def dfs(node):
+            if node is None or node.id in visited:
+                return
+            visited.add(node.id)
+            
+            if isinstance(node, OperatorNode):
+                for op in node.operands:
+                    dfs(op)
+                operators.append(node)
+            elif isinstance(node, BaseNode):
+                 pass
+
+        dfs(self.root)
+        return sorted(operators, key=lambda x: x.id)
+
+    def is_node_ready(self, node: OperatorNode) -> bool:
+        """ Helper: Checks if all operands of a node are scheduled or are inputs """
+        for operand in node.operands:
+            if isinstance(operand, OperatorNode):
+                if operand.id not in self.scheduled_ids:
+                    return False
+        return True
+
     @abstractmethod
     def find_candidate_nodes(self) -> List[OperatorNode]:
         pass
 
-    '''
-        Based on the algorithm, it selects nodes from frontier to be executed on the currently available resources.
-    '''
     @abstractmethod
-    def select_from_frontier(self, frontier : dict) -> List[OperatorNode]:
+    def select_from_frontier(self, frontier : List[OperatorNode]) -> List[OperatorNode]:
         pass
 
-    '''
-        Performs the process of scheduling.
-    '''
     @abstractmethod
     def schedule(self) -> None:
         pass
@@ -90,48 +74,43 @@ class MinLatencyScheduler(ListScheduler):
         super().__init__(dfg_root=dfg_root, numof_resources=numof_resources)
 
     def find_candidate_nodes(self) -> List[OperatorNode]:
+        all_ops = self._get_all_operators()
         candidates = []
-        for node in self.all_operators:
-            if node.id in self.scheduled_ids:
-                continue
-            
-            if self.is_node_ready(node):
-                candidates.append(node)
+        for node in all_ops:
+            if node.id not in self.scheduled_ids:
+                if self.is_node_ready(node):
+                    candidates.append(node)
         return candidates
 
-    def select_from_frontier(self, frontier : dict) -> List[OperatorNode]:
-        selected_nodes = []
-        
-        for res_type, nodes in frontier.items():
-            limit = self.numof_resources.get(res_type, 0)
-            
-            if len(nodes) <= limit:
-                selected_nodes.extend(nodes)
-            else:
-                nodes.sort(key=lambda x: (x.depth, x.id), reverse=True)
-                selected_nodes.extend(nodes[:limit])
-                
-        return selected_nodes
+    def select_from_frontier(self, frontier : List[OperatorNode]) -> List[OperatorNode]:
+        return sorted(frontier, key=lambda x: (-x.depth, x.id))
 
     def schedule(self) -> None:
         current_time = 1
-        
-        while len(self.scheduled_ids) < len(self.all_operators):
+        all_ops_count = len(self._get_all_operators())
+
+        while len(self.scheduled_ids) < all_ops_count:
             candidates = self.find_candidate_nodes()
             
-            frontier = {op: [] for op in OP_TYPES}
-            for node in candidates:
-                if node.op_type in frontier:
-                    frontier[node.op_type].append(node)
+            sorted_candidates = self.select_from_frontier(candidates)
+            available_resources = self.numof_resources.copy()
             
-            selected = self.select_from_frontier(frontier)
+            resource_usage_counter = {op: 1 for op in OP_TYPES}
+            scheduled_this_cycle = []
+
+            for node in sorted_candidates:
+                op_type = node.op_type
+                if available_resources.get(op_type, 0) > 0:
+                    res_id = resource_usage_counter[op_type]
+                    self.record_scheduled_node(node, current_time, res_id)
+                    
+                    available_resources[op_type] -= 1
+                    resource_usage_counter[op_type] += 1
+                    scheduled_this_cycle.append(node)
             
-            resource_counters = {op: 1 for op in OP_TYPES}
-            for node in selected:
-                res_id = resource_counters[node.op_type]
-                resource_counters[node.op_type] += 1
-                
-                self.record_scheduled_node(node, current_time, res_id)
+            if not scheduled_this_cycle and not candidates and len(self.scheduled_ids) < all_ops_count:
+                print("Error: Deadlock detected or disconnected graph.")
+                break
                 
             current_time += 1
 
@@ -140,79 +119,105 @@ class MinResourceScheduler(ListScheduler):
     def __init__(self, dfg_root : BaseNode, numof_resources : dict, max_time : int):
         super().__init__(dfg_root=dfg_root, numof_resources=numof_resources)
         self.max_time = max_time
+        self.all_operators = self._get_all_operators()
         self.latest_times = self.find_latest_times()
-        self.current_time = 0 
+        self.current_time_step = 1
 
-    '''
-        Assigns the latest possible time for each node to be executed (ALAP).
-    '''
     def find_latest_times(self) -> dict:
-        latest = {node.id: float('inf') for node in self.all_operators}
+        """ Calculates ALAP (As Late As Possible) times for all nodes """
+        latest_times = {}
         
-        sorted_ops = sorted(self.all_operators, key=lambda x: x.depth)
-        
-        latest[self.root.id] = self.max_time
+        sorted_ops = sorted(self.all_operators, key=lambda x: x.depth, reverse=True)
         
         for node in sorted_ops:
-            parent_deadline = latest[node.id]
-            
-            for operand in node.operands:
-                if isinstance(operand, OperatorNode):
-                    current_child_deadline = latest.get(operand.id, float('inf'))
-                    latest[operand.id] = min(current_child_deadline, parent_deadline - 1)
-                    
-        return latest
+            latest_times[node.id] = self.max_time
+
+        used_by = {node.id: [] for node in self.all_operators}
+        for node in self.all_operators:
+            for op in node.operands:
+                if isinstance(op, OperatorNode):
+                    used_by[op.id].append(node)
+        
+        for node in sorted_ops:
+            users = used_by[node.id]
+            if not users:
+                latest_times[node.id] = self.max_time
+            else:
+                min_successor_start = float('inf')
+                for user in users:
+                    min_successor_start = min(min_successor_start, latest_times[user.id])
+                latest_times[node.id] = min_successor_start - 1
+                
+        return latest_times
 
     def find_candidate_nodes(self) -> List[OperatorNode]:
         candidates = []
         for node in self.all_operators:
-            if node.id in self.scheduled_ids:
-                continue
-            
-            if self.is_node_ready(node):
-                candidates.append(node)
+            if node.id not in self.scheduled_ids:
+                if self.is_node_ready(node):
+                    candidates.append(node)
         return candidates
 
-    def select_from_frontier(self, frontier : dict) -> List[OperatorNode]:
-        selected_nodes = []
+    def select_from_frontier(self, frontier : List[OperatorNode]) -> List[OperatorNode]:
         
-        for res_type, nodes in frontier.items():
-            limit = self.numof_resources.get(res_type, 0)
+        def get_slack(node):
+            return self.latest_times[node.id] - self.current_time_step
             
-            node_slacks = []
-            for node in nodes:
-                slack = self.latest_times.get(node.id, self.max_time) - self.current_time
-                node_slacks.append((slack, node))
+        return sorted(frontier, key=lambda x: (get_slack(x), x.id))
+
+    def _run_scheduling_pass(self, resource_config):
+        """ Runs one pass of list scheduling with fixed resources """
+        self.scheduled_ids = set()
+        self.scheduled_nodes_info = []
+        self.current_time_step = 1
+        
+        ops_count = len(self.all_operators)
+        
+        while len(self.scheduled_ids) < ops_count:
+            if self.current_time_step > self.max_time:
+                return False, self.current_time_step 
             
-            node_slacks.sort(key=lambda x: (x[0], x[1].id))
+            candidates = self.find_candidate_nodes()
+            if not candidates and len(self.scheduled_ids) < ops_count:
+                return False, self.current_time_step
+
+            sorted_candidates = self.select_from_frontier(candidates)
             
-            top_nodes = [x[1] for x in node_slacks[:limit]]
-            selected_nodes.extend(top_nodes)
+            available = resource_config.copy()
+            res_usage = {op: 1 for op in OP_TYPES}
             
-        return selected_nodes
+            for node in sorted_candidates:
+                op = node.op_type
+                if available.get(op, 0) > 0:
+                    self.record_scheduled_node(node, self.current_time_step, res_usage[op])
+                    available[op] -= 1
+                    res_usage[op] += 1
+            
+            self.current_time_step += 1
+            
+        return True, self.current_time_step - 1
 
     def schedule(self) -> None:
-        self.current_time = 1
+        present_ops = set(n.op_type for n in self.all_operators)
         
-        while len(self.scheduled_ids) < len(self.all_operators):
-            candidates = self.find_candidate_nodes()
+        current_resources = {}
+        for op in OP_TYPES:
+            user_val = self.numof_resources.get(op, 0)
+            if op in present_ops and user_val == 0:
+                current_resources[op] = 1
+            else:
+                current_resources[op] = user_val
+        
+        while True:
+            success, final_latency = self._run_scheduling_pass(current_resources)
             
-            frontier = {op: [] for op in OP_TYPES}
-            for node in candidates:
-                if node.op_type in frontier:
-                    frontier[node.op_type].append(node)
-            
-            selected = self.select_from_frontier(frontier)
-            
-            resource_counters = {op: 1 for op in OP_TYPES}
-            for node in selected:
-                res_id = resource_counters[node.op_type]
-                resource_counters[node.op_type] += 1
-                
-                self.record_scheduled_node(node, self.current_time, res_id)
-                
-            self.current_time += 1
-            
-            if self.current_time > self.max_time + 10: 
-                print("Warning: Schedule exceeded max_time significantly.")
+            if success:
+                self.numof_resources = current_resources
                 break
+            else:
+                for op in present_ops:
+                    current_resources[op] += 1
+                
+                if any(v > 50 for v in current_resources.values()):
+                    print("Warning: Resource search diverging. Stopping.")
+                    break
