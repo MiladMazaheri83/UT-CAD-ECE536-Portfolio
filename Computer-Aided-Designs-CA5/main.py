@@ -5,6 +5,7 @@ from pathlib import Path
 from src.dfg_creator import GraphBuilder
 from src.graph_visualizer import expression_to_graph, visualize_graph, visualize_scheduled_graph
 from src.scheduler import MinLatencyScheduler, MinResourceScheduler, ScheduledNodeInfo
+from src.verilog_generator import VerilogGenerator
 
 MinResourceAlgorithm = "MinResourceLatencyConstrained"
 MinlatencyAlgorithm = "MinLatencyResourceContrained"
@@ -17,23 +18,22 @@ def build_dfg(expression: str, folder_path : str):
     ast_root = expression_to_graph(expression)
 
     dot = visualize_graph(ast_root)
-    dot.attr(label="", labelloc='t', fontsize='17')  
+    dot.attr(label="", labelloc='t', fontsize='17')
     dot.render(folder_path + "/pics/DFG", format='png', view=False, cleanup=True)
 
     builder = GraphBuilder()
     return builder.build(ast_root)
 
-
 def schedule_dfg(dfg_root, algorithm : str, config : dict, folder_path : str) -> list:
     if (algorithm == MinResourceAlgorithm):
         scheduler = MinResourceScheduler(dfg_root=dfg_root, numof_resources=config["Resources"], max_time=config["MaxTime"])
     else:
-        scheduler = MinLatencyScheduler(dfg_root=dfg_root, numof_resources=config["Resources"])    
+        scheduler = MinLatencyScheduler(dfg_root=dfg_root, numof_resources=config["Resources"])
     scheduler.schedule()
     schedule_info = scheduler.get_scheduling_info()
 
     dot = visualize_scheduled_graph(root_id=dfg_root.id, schedule_info=schedule_info)
-    dot.attr(label="", labelloc='t', fontsize='17')  
+    dot.attr(label="", labelloc='t', fontsize='17')
     dot.render(folder_path + "/pics/ScheduledDFG", format='png', view=False, cleanup=True)
 
     return schedule_info
@@ -44,9 +44,9 @@ def schedule_dfg(dfg_root, algorithm : str, config : dict, folder_path : str) ->
         - "{folder_path}/codes/datapath.v"
         - "{folder_path}/codes/controller.v"
 '''
-# TODO
 def generate_verilog(folder_path : str, schedule_info : list[ScheduledNodeInfo]):
-    pass
+    generator = VerilogGenerator(schedule_info)
+    generator.write_files(folder_path)
 
 def save_result(folder_path : str, schedule_info : list[ScheduledNodeInfo]):
     json_output = {}
@@ -58,7 +58,6 @@ def save_result(folder_path : str, schedule_info : list[ScheduledNodeInfo]):
                 "resource_num": node_info.resource_num
             }
         json.dump(json_output, file, indent=4)
-
 
 def run_test(folder_path : str):
     input_file_path = folder_path + "/input.json"
