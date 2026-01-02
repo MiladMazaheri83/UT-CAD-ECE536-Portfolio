@@ -1,28 +1,29 @@
-module controller(
+module Controller (
     input clk,
     input rst,
     input start,
-    output reg [1:0] state,
+    output reg [2:0] state,
     output reg done
 );
     parameter IDLE = 0;
-
+    
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= IDLE;
             done <= 0;
         end else begin
-            case (state)
-                IDLE: begin
+            if (state == IDLE) begin
+                if (start) begin
+                    state <= 1;
                     done <= 0;
-                    if (start) state <= 1;
                 end
-                3: begin
-                    state <= IDLE;
-                    done <= 1;
-                end
-                default: state <= state + 1;
-            endcase
+            end else if (state < 3) begin
+                state <= state + 1;
+                done <= 0;
+            end else begin
+                state <= IDLE;
+                done <= 1;
+            end
         end
     end
 endmodule
