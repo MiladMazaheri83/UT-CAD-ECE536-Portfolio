@@ -23,11 +23,11 @@ module Datapath (
 
     always @(*) begin
         case (state)
-            1: begin
+            3: begin
                 ALU_1_in1 = i1;
                 ALU_1_in2 = i2;
             end
-            4: begin
+            5: begin
                 ALU_1_in1 = w5;
                 ALU_1_in2 = w7;
             end
@@ -39,17 +39,17 @@ module Datapath (
     end
 
     assign ALU_1_out =
-        (state == 1) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) :
-        (state == 4) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) : 32'sd0;
+        (state == 3) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) :
+        (state == 5) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) : 32'sd0;
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             w2 <= 32'sd0;
             w8 <= 32'sd0;
         end else begin
-            if (state == 1)
+            if (state == 3)
                 w2 <= ALU_1_out;
-            if (state == 4)
+            if (state == 5)
                 w8 <= ALU_1_out;
         end
     end
@@ -62,15 +62,15 @@ module Datapath (
 
     always @(*) begin
         case (state)
-            1: begin
+            3: begin
                 MUL_1_in1 = i1;
                 MUL_1_in2 = i3;
             end
-            2: begin
+            4: begin
                 MUL_1_in1 = w2;
                 MUL_1_in2 = w4;
             end
-            3: begin
+            2: begin
                 MUL_1_in1 = w6;
                 MUL_1_in2 = i1;
             end
@@ -82,9 +82,9 @@ module Datapath (
     end
 
     assign MUL_1_temp =
-        (state == 1) ? ($signed(MUL_1_in1) / $signed(MUL_1_in2)) :
-        (state == 2) ? ($signed(MUL_1_in1) * $signed(MUL_1_in2)) :
-        (state == 3) ? ($signed(MUL_1_in1) * $signed(MUL_1_in2)) : 64'sd0;
+        (state == 3) ? ($signed(MUL_1_in1) / $signed(MUL_1_in2)) :
+        (state == 4) ? ($signed(MUL_1_in1) * $signed(MUL_1_in2)) :
+        (state == 2) ? ($signed(MUL_1_in1) * $signed(MUL_1_in2)) : 64'sd0;
 
     assign MUL_1_out = MUL_1_temp[31:0];
 
@@ -94,11 +94,11 @@ module Datapath (
             w5 <= 32'sd0;
             w7 <= 32'sd0;
         end else begin
-            if (state == 1)
-                w4 <= MUL_1_out;
-            if (state == 2)
-                w5 <= MUL_1_out;
             if (state == 3)
+                w4 <= MUL_1_out;
+            if (state == 4)
+                w5 <= MUL_1_out;
+            if (state == 2)
                 w7 <= MUL_1_out;
         end
     end

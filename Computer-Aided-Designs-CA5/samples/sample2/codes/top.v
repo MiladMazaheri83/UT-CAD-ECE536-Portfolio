@@ -8,7 +8,7 @@ module TopModule (
     output signed [31:0] result,
     output done
 );
-    wire [2:0] state;
+    wire [3:0] state;
 
     Controller ctrl_inst (
         .clk(clk),

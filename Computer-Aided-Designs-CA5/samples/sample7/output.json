@@ -15,7 +15,7 @@
         "resource_num": 1
     },
     "9": {
-        "clk": 1,
+        "clk": 3,
         "resource_type": "LOG",
         "resource_num": 1
     },
@@ -25,9 +25,9 @@
         "resource_num": 1
     },
     "13": {
-        "clk": 2,
+        "clk": 4,
         "resource_type": "LOG",
-        "resource_num": 1
+        "resource_num": 2
     },
     "14": {
         "clk": 5,

@@ -17,7 +17,7 @@ module Controller (
                     state <= 1;
                     done <= 0;
                 end
-            end else if (state < 6) begin
+            end else if (state < 3) begin
                 state <= state + 1;
                 done <= 0;
             end else begin

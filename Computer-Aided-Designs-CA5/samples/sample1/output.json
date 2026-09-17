@@ -1,16 +1,16 @@
 {
     "2": {
-        "clk": 1,
+        "clk": 3,
         "resource_type": "ALU",
         "resource_num": 1
     },
     "4": {
-        "clk": 1,
+        "clk": 3,
         "resource_type": "MUL",
         "resource_num": 1
     },
     "5": {
-        "clk": 2,
+        "clk": 4,
         "resource_type": "MUL",
         "resource_num": 1
     },
@@ -20,12 +20,12 @@
         "resource_num": 1
     },
     "7": {
-        "clk": 3,
+        "clk": 2,
         "resource_type": "MUL",
         "resource_num": 1
     },
     "8": {
-        "clk": 4,
+        "clk": 5,
         "resource_type": "ALU",
         "resource_num": 1
     }

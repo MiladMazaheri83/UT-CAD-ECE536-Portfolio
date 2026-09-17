@@ -70,10 +70,6 @@ module Datapath (
                 ALU_1_in1 = w2;
                 ALU_1_in2 = i3;
             end
-            1: begin
-                ALU_1_in1 = i4;
-                ALU_1_in2 = i5;
-            end
             default: begin
                 ALU_1_in1 = 0;
                 ALU_1_in2 = 0;
@@ -82,18 +78,44 @@ module Datapath (
     end
 
     assign ALU_1_out =
-        (state == 2) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) :
-        (state == 1) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) : 32'sd0;
+        (state == 2) ? ($signed(ALU_1_in1) + $signed(ALU_1_in2)) : 32'sd0;
 
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             w4 <= 32'sd0;
-            w7 <= 32'sd0;
         end else begin
             if (state == 2)
                 w4 <= ALU_1_out;
-            if (state == 1)
-                w7 <= ALU_1_out;
+        end
+    end
+
+    // Resource: ALU_2
+    reg signed [31:0] ALU_2_in1;
+    reg signed [31:0] ALU_2_in2;
+    wire signed [31:0] ALU_2_out;
+
+    always @(*) begin
+        case (state)
+            2: begin
+                ALU_2_in1 = i4;
+                ALU_2_in2 = i5;
+            end
+            default: begin
+                ALU_2_in1 = 0;
+                ALU_2_in2 = 0;
+            end
+        endcase
+    end
+
+    assign ALU_2_out =
+        (state == 2) ? ($signed(ALU_2_in1) + $signed(ALU_2_in2)) : 32'sd0;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            w7 <= 32'sd0;
+        end else begin
+            if (state == 2)
+                w7 <= ALU_2_out;
         end
     end
 

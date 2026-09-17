@@ -2,7 +2,7 @@ module Controller (
     input clk,
     input rst,
     input start,
-    output reg [2:0] state,
+    output reg [3:0] state,
     output reg done
 );
     parameter IDLE = 0;
@@ -17,7 +17,7 @@ module Controller (
                     state <= 1;
                     done <= 0;
                 end
-            end else if (state < 6) begin
+            end else if (state < 7) begin
                 state <= state + 1;
                 done <= 0;
             end else begin

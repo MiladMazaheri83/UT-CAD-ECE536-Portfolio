@@ -62,7 +62,7 @@ module TopModule_tb;
 
     // Timeout protection
     initial begin
-        #140;
+        #150;
         $display("ERROR: Simulation timeout!");
         $stop;
     end
