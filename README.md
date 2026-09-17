@@ -1,6 +1,8 @@
 # Computer-Aided Design of Digital Systems (CAD) - Portfolio
 
-This repository serves as a centralized index for my coursework in **ECE536: Computer-Aided Design of Digital Systems** at the School of Electrical & Computer Engineering, University of Tehran. 
+This repository hosts synthesizable digital design modules, CAD algorithmic tools, and micro-architectural implementations developed within the **Computer-Aided Design of Digital Systems (ECE536)** curriculum. 
+
+Every design conforms to strict RTL synthesis guidelines, deterministic timing closure constraints, and automated verification practices.
 
 ## Course Overview
 *   **Instructor:** Mostafa E. Salehi
