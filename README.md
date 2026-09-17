@@ -12,12 +12,3 @@ Throughout these modules, I successfully developed the ability to:
 *   Perform microarchitectural exploration to balance price, performance, and power metrics.
 *   Utilize standard EDA tool flows for hardware synthesis using Verilog & VHDL.
 *   Develop comprehensive verification and test plans.
-
-## Repository Index
-Below is the directory of my computer assignments and course projects. Clicking on each link will direct you to the dedicated repository containing the source code, testbenches, and module-specific documentation.
-
-| Module | Description | Repository Link |
-| :--- | :--- | :--- |
-
----
-*Note: All code commits and version histories are preserved within their respective individual repositories.*
